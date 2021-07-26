@@ -20,7 +20,7 @@ const Wrapper = styled.button<{ active?: boolean }>`
     height: 300px;
     width: 100px;
     background: ${({ theme }) => theme.color.background};
-    transform: rotate(-45deg) translateX(100px) translateY(-60px);
+    transform: rotate(-70deg) translateX(130px) translateY(-60px);
     transition: 300ms;
     z-index: -1;
   }

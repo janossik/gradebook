@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         height: 100vh;
         margin: 0;
-        
+        color:${({ theme }) => theme.color.text};
     }
     #root{
         height: 100%;

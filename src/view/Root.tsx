@@ -7,10 +7,8 @@ const Root = () => {
     <Router>
       <MainTemplate>
         <Switch>
-          {viewStorage.map(({ path, page }) => (
-            <Route key={path} path={path}>
-              {page}
-            </Route>
+          {viewStorage.map(({ path, view }) => (
+            <Route key={path} path={path} component={view} />
           ))}
         </Switch>
       </MainTemplate>

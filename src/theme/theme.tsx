@@ -39,7 +39,7 @@ export const theme = {
     secondary: "#838BD0",
     trinary: "#76DF74",
     background: "snow",
-    text: "black",
+    text: "#737C8E",
   },
   screen: {
     tablet: "768px",
@@ -47,7 +47,11 @@ export const theme = {
     desktop: "1920px",
   },
   font: {
-    family: { primary: `'Roboto', sans-serif`, secondary: `'Roboto', sans-serif`, tertiary: `'Roboto', sans-serif` },
+    family: {
+      primary: `'Montserrat', sans-serif`,
+      secondary: `'Roboto', sans-serif`,
+      tertiary: `'Roboto', sans-serif`,
+    },
     size: {
       xs: "12px",
       s: "16px",
@@ -58,8 +62,8 @@ export const theme = {
     weight: {
       light: 300,
       regular: 400,
-      semiBold: 500,
-      bold: 600,
+      semiBold: 600,
+      bold: 700,
     },
   },
 };

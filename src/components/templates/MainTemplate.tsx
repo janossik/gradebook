@@ -1,4 +1,7 @@
+import MenuLink from "components/atoms/MenuLink/MenuLink";
 import Navigation from "components/organisms/Navigation/Navigation";
+import UsersProvider from "providers/UsersProvider";
+import { useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "theme/GlobalStyle";
 import { theme } from "theme/theme";
@@ -19,7 +22,9 @@ const MainTemplate: React.FC = ({ children }) => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Navigation />
-      <Wrapper>{children}</Wrapper>
+      <UsersProvider>
+        <Wrapper>{children}</Wrapper>
+      </UsersProvider>
     </ThemeProvider>
   );
 };

@@ -22,7 +22,6 @@ const Wrapper = styled.nav<{ active: boolean }>`
 
 const Navigation = () => {
   const { active, refNavigation, inverseNavigation } = useHandleNavigation();
-
   return (
     <>
       <Hamburger active={active} onClick={inverseNavigation} />
