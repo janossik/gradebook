@@ -1,12 +1,6 @@
-import styled from "styled-components";
 import MenuLink from "components/atoms/MenuLink/MenuLink";
 import viewStorage from "utils/viewStorage";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 80%;
-`;
+import { Wrapper } from "./Menu.styles";
 
 const Menu = () => {
   return (

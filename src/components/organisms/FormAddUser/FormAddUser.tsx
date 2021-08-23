@@ -1,58 +1,7 @@
-/* 
-  {
-    id: "3",
-    score: 4.5,
-    name: "Cristina Moravia",
-    attendance: 0.78,
-  },
-*/
+import FiledInput from "components/molecules/FiledInput/FiledInput";
 import { UsersContext } from "providers/UsersProvider";
 import { useContext, useState } from "react";
-import styled from "styled-components";
-import UserList from "../UsersList/UsersList";
-
-const Wrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-type PropsFiledInput = {
-  name: string;
-  children: string;
-  value: string | number;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
-  min?: number;
-  max?: number;
-  step?: number;
-};
-
-type TypeFiledInput<Props = {}> = (props: Props & PropsFiledInput) => JSX.Element;
-
-const FiledInput: TypeFiledInput = ({ name, placeholder, children, value, onChange, min, max, step }) => {
-  if (typeof value === "number") {
-    return (
-      <>
-        <label htmlFor={name}>{children}</label>
-        <input type="number" min={min} max={max} step={step} value={value} onChange={onChange} name={name} required />
-      </>
-    );
-  }
-  return (
-    <>
-      <label htmlFor={name}>{children}</label>
-      <input
-        type="text"
-        minLength={3}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required
-      />
-    </>
-  );
-};
+import { Wrapper, Button } from "./FormAddUser.styles";
 
 enum UserProps {
   FIRSTNAME = "firstName",
@@ -145,7 +94,7 @@ const FormAddUser = () => {
       >
         Score
       </FiledInput>
-      <button>submit</button>
+      <Button>submit</Button>
     </Wrapper>
   );
 };
