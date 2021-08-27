@@ -5,11 +5,11 @@ import GlobalStyle from "theme/GlobalStyle";
 import { theme } from "theme/theme";
 import { Wrapper } from "./MainTemplate.styles";
 
-const MainTemplate: React.FC = ({ children }) => {
+const MainTemplate = ({ children, widthOutNav }: { children: JSX.Element; widthOutNav?: boolean }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Navigation />
+      {!widthOutNav && <Navigation />}
       <UsersProvider>
         <Wrapper>{children}</Wrapper>
       </UsersProvider>

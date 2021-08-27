@@ -1,10 +1,9 @@
 import CloseButton from "components/atoms/CloseButton/CloseButton";
-import { Wrapper } from "components/atoms/MenuLink/MenuLink.styles";
 import Score from "components/atoms/Score/Score";
 import { UsersContext } from "providers/UsersProvider";
 import { useContext } from "react";
 import { PropsUserListItem } from "types/types";
-import { Content, NameUser } from "./UserListItem.styles";
+import { Wrapper, Content, NameUser } from "./UserListItem.styles";
 
 const UsersListItem = ({ id, score, name, attendance }: PropsUserListItem) => {
   const [users, setUsers] = useContext(UsersContext);
@@ -13,7 +12,7 @@ const UsersListItem = ({ id, score, name, attendance }: PropsUserListItem) => {
     setUsers(filteredUsers);
   };
   return (
-    <Wrapper>
+    <Wrapper data-testid="user">
       <div>
         <Score score={score} />
       </div>

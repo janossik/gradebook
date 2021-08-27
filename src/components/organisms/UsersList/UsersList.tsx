@@ -1,12 +1,7 @@
 import UsersListItem from "components/molecules/UsersListItem/UsersListItem";
 import { UsersContext } from "providers/UsersProvider";
 import { useContext } from "react";
-import styled from "styled-components";
-
-const Wrapper = styled.article`
-  display: grid;
-  gap: 10px;
-`;
+import { Wrapper } from "./UsersList.styles";
 
 const UserList = () => {
   const [users] = useContext(UsersContext);

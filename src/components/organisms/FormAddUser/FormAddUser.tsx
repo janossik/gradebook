@@ -1,100 +1,51 @@
-import FiledInput from "components/molecules/FiledInput/FiledInput";
+import { useContext } from "react";
+import useForm from "hooks/useForm";
 import { UsersContext } from "providers/UsersProvider";
-import { useContext, useState } from "react";
+import FiledInput from "components/molecules/FiledInput/FiledInput";
+import { initialValuesFormAddUser, getID, formFields, UserProps } from "utils/utils";
 import { Wrapper, Button } from "./FormAddUser.styles";
-
-enum UserProps {
-  FIRSTNAME = "firstName",
-  LASTNAME = "lastName",
-  SCORE = "score",
-  ATTENDANCE = "attendance",
-}
-
-const initUser = (firstName?: string, lastName?: string, score?: number, attendance?: number) => ({
-  [UserProps.FIRSTNAME]: firstName || "",
-  [UserProps.LASTNAME]: lastName || "",
-  [UserProps.SCORE]: score || 0,
-  [UserProps.ATTENDANCE]: attendance || 0,
-});
 
 const FormAddUser = () => {
   const [users, setUsers] = useContext(UsersContext);
-  const [user, setUser] = useState(initUser());
+  const { state, handleClearForm, handleInputChange, handleToggleConsent } = useForm(initialValuesFormAddUser);
+
+  const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (state.consents) {
+      const newUser = {
+        id: getID(),
+        name: `${state[UserProps.FIRSTNAME]} ${state[UserProps.LASTNAME]}`,
+        ...state,
+      };
+      setUsers([...users, newUser]);
+      handleClearForm();
+    }
+  };
+
   return (
-    <Wrapper
-      onSubmit={(e) => {
-        e.preventDefault();
-        const currentUsers = users;
-        const newUser = {
-          id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
-          score: user[UserProps.SCORE],
-          name: `${user[UserProps.FIRSTNAME]} ${user[UserProps.LASTNAME]}`,
-          attendance: user[UserProps.ATTENDANCE],
-        };
-        currentUsers.push(newUser);
-        setUsers(currentUsers);
-        setUser(initUser());
-      }}
-    >
+    <Wrapper onSubmit={submit}>
+      {formFields.map((props) => (
+        <FiledInput
+          key={props.name}
+          value={state[props.name]}
+          onChange={({ target: { name, value } }) => {
+            handleInputChange(name, value);
+          }}
+          {...props}
+        />
+      ))}
+
       <FiledInput
-        name="firstName"
-        placeholder="Write your first name"
-        value={user[UserProps.FIRSTNAME]}
-        onChange={({ target: { value } }) => {
-          setUser(initUser(value, user[UserProps.LASTNAME], user[UserProps.SCORE], user[UserProps.ATTENDANCE]));
+        type="checkbox"
+        name={UserProps.CONSENTS}
+        value={state[UserProps.CONSENTS]}
+        onChange={({ target: { name } }) => {
+          handleToggleConsent(name);
         }}
       >
-        First name
+        Consents
       </FiledInput>
-      <FiledInput
-        name="firstName"
-        placeholder="Write your first name"
-        value={user[UserProps.LASTNAME]}
-        onChange={({ target: { value } }) => {
-          setUser(initUser(user[UserProps.FIRSTNAME], value, user[UserProps.SCORE], user[UserProps.ATTENDANCE]));
-        }}
-      >
-        First name
-      </FiledInput>
-      <FiledInput
-        min={0}
-        max={6}
-        step={0.5}
-        name="score"
-        value={user[UserProps.SCORE]}
-        onChange={({ target: { value } }) => {
-          if (Number(value) >= 0 && Number(value) <= 6) {
-            setUser(
-              initUser(user[UserProps.FIRSTNAME], user[UserProps.LASTNAME], Number(value), user[UserProps.ATTENDANCE])
-            );
-          }
-        }}
-      >
-        Score
-      </FiledInput>
-      <FiledInput
-        min={0}
-        max={1}
-        step={0.01}
-        name="attendance"
-        value={user[UserProps.ATTENDANCE]}
-        onChange={({ target: { value } }) => {
-          const convertValue = Number(value);
-          if (convertValue >= 0 && convertValue <= 6) {
-            setUser(
-              initUser(
-                user[UserProps.FIRSTNAME],
-                user[UserProps.LASTNAME],
-                user[UserProps.SCORE],
-                Number(convertValue.toFixed(2))
-              )
-            );
-          }
-        }}
-      >
-        Score
-      </FiledInput>
-      <Button>submit</Button>
+      <Button data-testid="submit">submit</Button>
     </Wrapper>
   );
 };

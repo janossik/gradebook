@@ -8,9 +8,11 @@ export interface PropsFiledInput {
   value: string | number;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  minLength?: number;
   min?: number;
   max?: number;
   step?: number;
+  type?: string;
 }
 
 export type TypeFiledInput<Props = {}> = (props: Props & PropsFiledInput) => JSX.Element;
@@ -20,4 +22,5 @@ export interface PropsUserListItem {
   score: number;
   name: string;
   attendance: number;
+  consents?: boolean;
 }
