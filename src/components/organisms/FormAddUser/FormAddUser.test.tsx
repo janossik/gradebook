@@ -37,9 +37,7 @@ describe("Form add user", () => {
     fireEvent.change(score, { target: { value: 5 } });
     fireEvent.change(attendance, { target: { value: 0.5 } });
 
-    expect(consents).not.toBeChecked();
-    fireEvent.click(consents, { target: { value: true } });
-    expect(consents).toBeChecked();
+    fireEvent.click(consents, { value: true });
 
     expect(firstName).toHaveValue("Adam");
     expect(lastName).toHaveValue("Bravo");
@@ -68,7 +66,7 @@ describe("Form add user", () => {
     fireEvent.change(score, { target: { value: 5 } });
     fireEvent.change(attendance, { target: { value: 0.5 } });
 
-    fireEvent.click(consents, { target: { value: true } });
+    fireEvent.click(consents, { value: true });
 
     expect(firstName).toHaveValue("Adam");
     expect(lastName).toHaveValue("Bravo");
@@ -106,13 +104,12 @@ describe("Form add user", () => {
     fireEvent.change(score, { target: { value: 5 } });
     fireEvent.change(attendance, { target: { value: 0.5 } });
 
-    fireEvent.click(consents, { target: { value: true } });
+    fireEvent.click(consents, { value: true });
 
     fireEvent.click(submit);
 
     screen.getByText("Adam Bravo");
     screen.getByText("5");
     screen.getByText(`attendance: 50%`);
-    expect(consents).toBeChecked();
   });
 });

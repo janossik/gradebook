@@ -2,11 +2,18 @@ import styled from "styled-components";
 
 //calc(clamp(300px, 100%, 30%) + 20px)
 export const Wrapper = styled.main`
-  display: flex;
-  padding: 20px 20px 20px 20px;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  min-height: 90vh;
+  padding: 20px 10px;
+  grid-template-rows: 90px 1fr;
+  grid-template-columns: 1fr 0.75fr;
+  * {
+    justify-self: center;
+  }
+
   @media screen and (max-width: ${({ theme }) => theme.screen.tablet}) {
-    padding: 40px 10px 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: 90px;
+    gap: 20px;
   }
 `;

@@ -1,12 +1,11 @@
 import styled from "styled-components";
+import { PropsTitle } from "types/types";
 
-const TitleBody = styled.h3`
-  font-size: ${({ theme }) => theme.font.size.l};
-  color: ${({ theme }) => theme.color.background};
+const Title = styled.h3<PropsTitle>`
+  font-size: ${({ theme, fontSize }) => (fontSize ? theme.font.size[fontSize] : theme.font.size["m"])};
+  color: ${({ color, theme }) => (color ? theme.color[color] : theme.color["primary"])};
+  font-weight: ${({ theme, fontWeight }) => (fontWeight ? theme.font.weight[fontWeight] : theme.font.weight["bold"])};
+  margin-bottom: 10px;
 `;
-
-const Title = ({ as, children }: { as?: "h4" | "h3" | "h2" | "h1"; children: string }) => (
-  <TitleBody as={as ? as : "h3"}>{children}</TitleBody>
-);
 
 export default Title;

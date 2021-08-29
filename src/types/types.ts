@@ -24,3 +24,17 @@ export interface PropsUserListItem {
   attendance: number;
   consents?: boolean;
 }
+
+export interface Color {
+  color?: "primary" | "secondary" | "trinary" | "background" | "text";
+}
+
+export interface FontSize {
+  fontSize?: "xs" | "s" | "m" | "l" | "xl";
+}
+
+export interface FontWeight {
+  fontWeight?: "light" | "regular" | "medium" | "bold";
+}
+
+export interface PropsTitle extends Color, FontSize, FontWeight {}

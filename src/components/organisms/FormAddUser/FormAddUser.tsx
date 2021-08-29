@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useForm from "hooks/useForm";
 import { UsersContext } from "providers/UsersProvider";
 import FiledInput from "components/molecules/FiledInput/FiledInput";
 import { initialValuesFormAddUser, getID, formFields, UserProps } from "utils/utils";
 import { Wrapper, Button } from "./FormAddUser.styles";
+import CheckBox from "components/atoms/CheckBox/CheckBox";
 
 const FormAddUser = () => {
   const [users, setUsers] = useContext(UsersContext);
   const { state, handleClearForm, handleInputChange, handleToggleConsent } = useForm(initialValuesFormAddUser);
+  const [error, setError] = useState(false);
 
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -19,6 +21,8 @@ const FormAddUser = () => {
       };
       setUsers([...users, newUser]);
       handleClearForm();
+    } else {
+      setError(true);
     }
   };
 
@@ -34,17 +38,16 @@ const FormAddUser = () => {
           {...props}
         />
       ))}
-
-      <FiledInput
-        type="checkbox"
+      <p>Consents</p>
+      <CheckBox
         name={UserProps.CONSENTS}
         value={state[UserProps.CONSENTS]}
-        onChange={({ target: { name } }) => {
-          handleToggleConsent(name);
+        onClick={() => {
+          handleToggleConsent(UserProps.CONSENTS);
+          setError(false);
         }}
-      >
-        Consents
-      </FiledInput>
+      />
+      {error && <p>You must checking consents!</p>}
       <Button data-testid="submit">submit</Button>
     </Wrapper>
   );

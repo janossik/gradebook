@@ -26,7 +26,7 @@ declare module "styled-components" {
       weight: {
         light: number;
         regular: number;
-        semiBold: number;
+        medium: number;
         bold: number;
       };
     };
@@ -39,7 +39,7 @@ export const theme = {
     secondary: "#838BD0",
     trinary: "#76DF74",
     background: "snow",
-    text: "#737C8E",
+    text: "#737c8e",
   },
   screen: {
     tablet: "768px",
@@ -62,7 +62,7 @@ export const theme = {
     weight: {
       light: 300,
       regular: 400,
-      semiBold: 600,
+      medium: 500,
       bold: 700,
     },
   },

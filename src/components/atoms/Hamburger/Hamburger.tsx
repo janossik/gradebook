@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.button<{ active?: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 5px;
   right: 10px;
   display: flex;

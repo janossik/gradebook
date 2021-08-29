@@ -10,7 +10,7 @@ const Navigation = () => {
     <>
       <Hamburger active={active} onClick={inverseNavigation} />
       <Wrapper active={active} ref={refNavigation}>
-        <Title>GradeBook</Title>
+        <Title color="background">GradeBook</Title>
         <Menu />
       </Wrapper>
     </>
