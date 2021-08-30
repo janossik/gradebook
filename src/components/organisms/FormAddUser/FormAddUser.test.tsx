@@ -32,14 +32,14 @@ describe("Form add user", () => {
     const attendance = screen.getByTestId(`attendance`);
     const consents = screen.getByTestId(`consents`);
 
-    fireEvent.change(firstName, { target: { value: "Adam" } });
+    fireEvent.change(firstName, { target: { value: "Jon" } });
     fireEvent.change(lastName, { target: { value: "Bravo" } });
     fireEvent.change(score, { target: { value: 5 } });
     fireEvent.change(attendance, { target: { value: 0.5 } });
 
     fireEvent.click(consents, { value: true });
 
-    expect(firstName).toHaveValue("Adam");
+    expect(firstName).toHaveValue("Jon");
     expect(lastName).toHaveValue("Bravo");
     expect(score).toHaveValue(5);
     expect(attendance).toHaveValue(0.5);
@@ -99,7 +99,7 @@ describe("Form add user", () => {
     const submit = screen.getByTestId(`submit`);
 
     //Completing the form
-    fireEvent.change(firstName, { target: { value: "Adam" } });
+    fireEvent.change(firstName, { target: { value: "Jon" } });
     fireEvent.change(lastName, { target: { value: "Bravo" } });
     fireEvent.change(score, { target: { value: 5 } });
     fireEvent.change(attendance, { target: { value: 0.5 } });
@@ -108,7 +108,7 @@ describe("Form add user", () => {
 
     fireEvent.click(submit);
 
-    screen.getByText("Adam Bravo");
+    screen.getByText("Jon Bravo");
     screen.getByText("5");
     screen.getByText(`attendance: 50%`);
   });
