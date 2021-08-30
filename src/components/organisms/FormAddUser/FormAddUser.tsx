@@ -38,15 +38,17 @@ const FormAddUser = () => {
           {...props}
         />
       ))}
-      <p>Consents</p>
-      <CheckBox
-        name={UserProps.CONSENTS}
-        value={state[UserProps.CONSENTS]}
-        onClick={() => {
-          handleToggleConsent(UserProps.CONSENTS);
-          setError(false);
-        }}
-      />
+      <div>
+        <p>Consents</p>
+        <CheckBox
+          name={UserProps.CONSENTS}
+          value={state[UserProps.CONSENTS]}
+          onClick={() => {
+            handleToggleConsent(UserProps.CONSENTS);
+            setError(false);
+          }}
+        />
+      </div>
       {error && <p>You must checking consents!</p>}
       <Button data-testid="submit">submit</Button>
     </Wrapper>

@@ -1,11 +1,11 @@
 import MenuLink from "components/atoms/MenuLink/MenuLink";
-import viewStorage from "utils/viewStorage";
+import pages from "utils/pages";
 import { Wrapper } from "./Menu.styles";
 
 const Menu = () => {
   return (
     <Wrapper>
-      {viewStorage.map(({ path, name }) => (
+      {pages.map(({ path, name }) => (
         <MenuLink key={name} to={path}>
           {name}
         </MenuLink>

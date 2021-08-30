@@ -38,3 +38,12 @@ export interface FontWeight {
 }
 
 export interface PropsTitle extends Color, FontSize, FontWeight {}
+
+export interface NewsProps {
+  id?: string;
+  title: string;
+  category: string;
+  content: string;
+  image?: { url: string };
+  alt?: string;
+}
