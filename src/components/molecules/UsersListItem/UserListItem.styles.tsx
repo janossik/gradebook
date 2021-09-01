@@ -3,23 +3,19 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
   display: grid;
   min-height: 80px;
-  min-width: 300px;
+  min-width: 260px;
   grid-template-columns: 20% 80%;
-  justify-content: center;
   align-items: center;
+  gap: 10px;
 `;
 
 export const Content = styled.div`
-  div:first-child {
-    display: flex;
-    gap: 30px;
-  }
-  div:last-child {
-    font-size: ${({ theme }) => theme.font.size.xs};
-  }
+  width: 100%;
+  white-space: nowrap;
+  display: flex;
+  justify-self: left;
 `;
 
-export const NameUser = styled.h4`
-  font-size: ${({ theme }) => theme.font.size.s};
-  margin: 0;
+export const WrapperButton = styled.div`
+  margin-left: auto;
 `;

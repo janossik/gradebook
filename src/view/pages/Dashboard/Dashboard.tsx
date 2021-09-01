@@ -1,6 +1,6 @@
 import UsersList from "components/organisms/UsersList/UsersList";
 
-const HomePage: React.FC = () => {
+const Dashboard: React.FC = () => {
   return (
     <>
       <UsersList />
@@ -8,4 +8,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default Dashboard;

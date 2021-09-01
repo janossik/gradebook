@@ -5,8 +5,8 @@ import { Wrapper } from "./Menu.styles";
 const Menu = () => {
   return (
     <Wrapper>
-      {pages.map(({ path, name }) => (
-        <MenuLink key={name} to={path}>
+      {pages.map(({ path, name, menuPath }) => (
+        <MenuLink key={name} to={menuPath ? menuPath : path}>
           {name}
         </MenuLink>
       ))}

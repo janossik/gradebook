@@ -1,41 +1,18 @@
-import { createContext, FC, useState } from "react";
-
-interface IUser {
-  id: string;
-  name: string;
-  attendance: string;
-  average: string;
-  group: string;
-}
-
-const usersData = [
-  {
-    id: "1",
-    name: "Adam Romański",
-    attendance: "39%",
-    average: "2.3",
-    group: "A",
-  },
-  {
-    id: "2",
-    name: "Krzysztof Batko",
-    attendance: "23%",
-    average: "3.3",
-    group: "A",
-  },
-  {
-    id: "3",
-    name: "Patrycja Gonciarz",
-    attendance: "45%",
-    average: "4.3",
-    group: "A",
-  },
-];
+import axios from "axios";
+import { createContext, FC, useEffect, useState } from "react";
+import { IUser } from "types/types";
 
 export const UsersContext = createContext<[IUser[], (users: IUser[]) => void]>([[], () => {}]);
 
 const UsersProvider: FC = ({ children }) => {
-  const [users, setUsers] = useState<IUser[]>(usersData);
+  const [users, setUsers] = useState<IUser[]>([]);
+
+  useEffect(() => {
+    axios.get("/students").then(({ data: { students } }) => {
+      setUsers(students);
+    });
+    return () => {};
+  }, []);
 
   const handlerUsers = (users: IUser[]) => {
     setUsers(users);

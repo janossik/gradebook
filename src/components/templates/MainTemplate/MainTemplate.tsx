@@ -1,7 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { theme } from "theme/theme";
 import GlobalStyle from "theme/GlobalStyle";
-import UsersProvider from "providers/UsersProvider";
 import SearchBar from "components/molecules/SearchBar/SearchBar";
 import Navigation from "components/organisms/Navigation/Navigation";
 import NewsSection from "components/organisms/NewsSection/NewsSection";
@@ -12,7 +11,7 @@ const MainTemplate = ({ children, withoutElements }: { children: JSX.Element; wi
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       {!withoutElements && <Navigation />}
-      <UsersProvider>
+      <>
         <Wrapper>
           {!withoutElements && (
             <>
@@ -22,7 +21,7 @@ const MainTemplate = ({ children, withoutElements }: { children: JSX.Element; wi
           )}
           {children}
         </Wrapper>
-      </UsersProvider>
+      </>
     </ThemeProvider>
   );
 };

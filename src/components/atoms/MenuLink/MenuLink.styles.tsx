@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 export const BodyLink = styled(NavLink)`
   display: block;
   height: 50px;
-  width: 100px;
+  min-width: 100px;
   padding: 10px 0;
   text-decoration: none;
   text-align: center;

@@ -1,15 +1,16 @@
 import GradesPage from "view/pages/GradesPage/GradesPage";
-import DesktopPage from "view/pages/HomePage/DesktopPage";
+import Dashboard from "view/pages/Dashboard/Dashboard";
 import LoginPage from "view/pages/LoginPage/LoginPage";
 
 interface websiteItem {
   View: React.FC<any>;
   path: string;
+  menuPath?: string;
   name: string;
 }
 
 const pages: websiteItem[] = [
-  { View: DesktopPage, path: "/desktop", name: "desktop" },
+  { View: Dashboard, path: "/dashboard/:id?", menuPath: "/dashboard/A", name: "dashboard" },
   { View: GradesPage, path: "/grades", name: "grades" },
 ];
 

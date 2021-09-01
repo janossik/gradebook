@@ -1,6 +1,6 @@
 import MainTemplate from "components/templates/MainTemplate/MainTemplate";
 import { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import pages from "utils/pages";
 
 const Authorized = () => (
@@ -8,7 +8,17 @@ const Authorized = () => (
     <MainTemplate>
       <Switch>
         {pages.map(({ path, View }) => {
-          return path !== "/" && <Route key={path} path={path} component={View} />;
+          return path !== "/" ? (
+            <Route key={path} path={path} component={View} />
+          ) : (
+            <Route
+              key={path}
+              path={path}
+              component={() => {
+                return <Redirect to="/dashboard" />;
+              }}
+            />
+          );
         })}
       </Switch>
     </MainTemplate>
