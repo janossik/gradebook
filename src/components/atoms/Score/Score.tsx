@@ -11,6 +11,6 @@ const Wrapper = styled.span<{ score: number }>`
   border-radius: 100%;
 `;
 
-const Score = ({ score }: { score: number }) => <Wrapper score={score}>{score}</Wrapper>;
+const Score = ({ score }: { score: string }) => <Wrapper score={Number(score)}>{score}</Wrapper>;
 
 export default Score;

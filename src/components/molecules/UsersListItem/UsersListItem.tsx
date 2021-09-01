@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { PropsUserListItem } from "types/types";
 import { Wrapper, Content, NameUser } from "./UserListItem.styles";
 
-const UsersListItem = ({ id, score, name, attendance }: PropsUserListItem) => {
+const UsersListItem = ({ id, name, attendance, average, group }: PropsUserListItem) => {
   const [users, setUsers] = useContext(UsersContext);
   const removeUser = () => {
     const filteredUsers = users.filter((user) => user.id !== id);
@@ -14,7 +14,7 @@ const UsersListItem = ({ id, score, name, attendance }: PropsUserListItem) => {
   return (
     <Wrapper data-testid="user">
       <div>
-        <Score score={score} />
+        <Score score={average} />
       </div>
       <Content>
         <div>
@@ -23,7 +23,7 @@ const UsersListItem = ({ id, score, name, attendance }: PropsUserListItem) => {
             <CloseButton onClick={removeUser} />
           </div>
         </div>
-        <div>attendance: {attendance * 100}%</div>
+        <div>attendance: {attendance}</div>
       </Content>
     </Wrapper>
   );

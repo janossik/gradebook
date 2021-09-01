@@ -11,17 +11,22 @@ export const childNodesToArray = (element: HTMLElement) => {
 };
 
 export enum UserProps {
-  FIRSTNAME = "firstName",
-  LASTNAME = "lastName",
-  SCORE = "score",
+  NAME = "name",
+  AVERAGE = "average",
   ATTENDANCE = "attendance",
   CONSENTS = "consents",
 }
+export interface IUser {
+  id: string;
+  name: string;
+  attendance: string;
+  average: string;
+  group: string;
+}
 
 export const initialValuesFormAddUser = {
-  [UserProps.FIRSTNAME]: "",
-  [UserProps.LASTNAME]: "",
-  [UserProps.SCORE]: 0,
+  [UserProps.NAME]: "",
+  [UserProps.AVERAGE]: 0,
   [UserProps.ATTENDANCE]: 0,
   [UserProps.CONSENTS]: false,
 };
@@ -37,17 +42,12 @@ export const formFields: {
 }[] = [
   {
     placeholder: "Write your first name",
-    name: UserProps.FIRSTNAME,
-    children: "First Name",
+    name: UserProps.NAME,
+    children: "Name",
   },
   {
-    placeholder: "Write your last name",
-    name: UserProps.LASTNAME,
-    children: "Last Name",
-  },
-  {
-    name: UserProps.SCORE,
-    children: "Score",
+    name: UserProps.AVERAGE,
+    children: UserProps.AVERAGE,
     type: "number",
     min: 0,
     max: 6,
@@ -58,8 +58,8 @@ export const formFields: {
     children: "attendance",
     type: "number",
     min: 0,
-    max: 1,
-    step: 0.01,
+    max: 100,
+    step: 1,
   },
 ];
 

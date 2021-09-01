@@ -16,7 +16,6 @@ const FormAddUser = () => {
     if (state.consents) {
       const newUser = {
         id: getID(),
-        name: `${state[UserProps.FIRSTNAME]} ${state[UserProps.LASTNAME]}`,
         ...state,
       };
       setUsers([...users, newUser]);
@@ -28,16 +27,12 @@ const FormAddUser = () => {
 
   return (
     <Wrapper onSubmit={submit}>
-      {formFields.map((props) => (
-        <FiledInput
-          key={props.name}
-          value={state[props.name]}
-          onChange={({ target: { name, value } }) => {
-            handleInputChange(name, value);
-          }}
-          {...props}
-        />
-      ))}
+      {formFields.map((props) => {
+        const handleFiledInputChange: React.ChangeEventHandler<HTMLInputElement> = ({ target: { name, value } }) => {
+          handleInputChange(name, value);
+        };
+        return <FiledInput key={props.name} value={state[props.name]} onChange={handleFiledInputChange} {...props} />;
+      })}
       <div>
         <p>Consents</p>
         <CheckBox

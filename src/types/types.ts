@@ -17,11 +17,15 @@ export interface PropsFiledInput {
 
 export type TypeFiledInput<Props = {}> = (props: Props & PropsFiledInput) => JSX.Element;
 
-export interface PropsUserListItem {
+export interface IUser {
   id: string;
-  score: number;
   name: string;
-  attendance: number;
+  attendance: string;
+  average: string;
+  group: string;
+}
+
+export interface PropsUserListItem extends IUser {
   consents?: boolean;
 }
 
