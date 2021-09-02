@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  position: relative;
   display: grid;
   min-height: 90px;
   width: 100%;
@@ -20,7 +21,6 @@ export const SearchInput = styled.input`
   height: 50px;
   width: 100%;
   padding: 0 20px;
-  font-size: 24px;
   grid-column: 2/3;
   border: 2px solid ${({ theme }) => theme.color.primary};
   border-radius: 50px;

@@ -5,11 +5,11 @@ import App from "./view/Root";
 
 const root = document.getElementById("root");
 
-worker.start();
-
-ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  root
-);
+worker.start().then(() => {
+  ReactDOM.render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+    root
+  );
+});

@@ -8,6 +8,7 @@ const Button = styled.button`
   background-color: ${({ theme }) => theme.color.background};
   border: none;
   border-radius: 100px;
+  transition: 300ms;
   ::first-letter {
     text-transform: capitalize;
   }
