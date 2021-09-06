@@ -1,10 +1,9 @@
-import axios from "axios";
 import Header from "components/molecules/Header/Header";
 import UsersList from "components/organisms/UsersList/UsersList";
-import { useState, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import useStudents from "hooks/useStudents";
+import { useEffect, useState } from "react";
+import { NavLink, Redirect, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { IUser } from "types/types";
 
 const StyledNavLink = styled(NavLink)<{ active?: number }>`
   display: inline-flex;
@@ -18,6 +17,11 @@ const StyledNavLink = styled(NavLink)<{ active?: number }>`
   justify-content: center;
   text-decoration: none;
   border-radius: 30%;
+  transition: 300ms;
+  :hover {
+    background-color: ${({ theme }) => theme.color.secondary};
+    color: ${({ theme }) => theme.color.background};
+  }
   ${({ active }) =>
     active &&
     css`
@@ -31,21 +35,22 @@ const StyledNavLink = styled(NavLink)<{ active?: number }>`
 `;
 
 const Dashboard: React.FC = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [groups, setGroups] = useState<string[]>([]);
   const { id } = useParams<{ id: string }>();
+  const [groups, setGroups] = useState<string[]>([]);
+  const { getGroups } = useStudents();
 
   useEffect(() => {
-    axios.get(`/groups`).then(({ data: { groups } }) => {
-      setGroups(groups);
-    });
-  }, []);
+    (async () => {
+      const groups = await getGroups();
+      if (groups) {
+        setGroups(groups);
+      }
+    })();
+  }, [getGroups]);
 
-  useEffect(() => {
-    axios.get(`/students/${id || groups[0]}`).then(({ data: { students } }: { data: { students: IUser[] } }) => {
-      setUsers(students);
-    });
-  }, [id, groups]);
+  if (!id && groups.length > 0) {
+    return <Redirect to={`/dashboard/${groups[0]}`} />;
+  }
 
   return (
     <div>
@@ -61,7 +66,7 @@ const Dashboard: React.FC = () => {
           </>
         }
       />
-      <UsersList users={users} />
+      <UsersList id={id} />
     </div>
   );
 };

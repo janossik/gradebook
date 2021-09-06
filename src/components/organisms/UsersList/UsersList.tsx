@@ -1,14 +1,27 @@
 import UsersListItem from "components/molecules/UsersListItem/UsersListItem";
+import useStudents from "hooks/useStudents";
+import { useState, useEffect } from "react";
 import { IUser } from "types/types";
 import { Wrapper } from "./UsersList.styles";
 
-const UserList = ({ users }: { users: IUser[] }) => {
+const UserList = ({ id }: { id: string }) => {
+  const { getStudents } = useStudents();
+  const [students, setStudents] = useState<IUser[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const students = await getStudents(id);
+      if (students) {
+        setStudents(students);
+      }
+    })();
+  }, [id, getStudents]);
+
   return (
     <>
-      {users.length ? (
+      {students.length ? (
         <Wrapper>
-          {/*            */}
-          {users.map((props) => (
+          {students.map((props) => (
             <UsersListItem key={props.id} {...props} />
           ))}
         </Wrapper>

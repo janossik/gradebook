@@ -16,17 +16,3 @@ export const Wrapper = styled.div`
     font-size: 14px;
   }
 `;
-
-export const SearchInput = styled.input`
-  height: 50px;
-  width: 100%;
-  padding: 0 20px;
-  grid-column: 2/3;
-  border: 2px solid ${({ theme }) => theme.color.primary};
-  border-radius: 50px;
-  outline: none;
-  :focus {
-    border: 2px solid ${({ theme }) => theme.color.secondary};
-    color: ${({ theme }) => theme.color.secondary};
-  }
-`;
