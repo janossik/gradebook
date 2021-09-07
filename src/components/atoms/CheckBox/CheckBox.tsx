@@ -9,7 +9,7 @@ const Wrapper = styled.div<{ value: boolean }>`
   border: solid 1px black;
   border-radius: 3px;
   background-color: ${({ value, theme }) => (value ? theme.color.primary : "snow")};
-  border-color: ${({ value, theme }) => (value ? theme.color.primary : "black")};
+  border-color: ${({ value, theme }) => (value ? theme.color.primary : theme.color.text)};
   transition: 200ms;
   ::after {
     content: "";
@@ -37,12 +37,27 @@ const CheckBox = ({
   value,
   name,
   onClick,
+  color,
 }: {
   value: boolean;
   name: string;
   onClick: React.MouseEventHandler<HTMLElement>;
+  color?: string | undefined;
 }) => {
-  return <Wrapper value={value} key={name} data-testid={name} onClick={onClick}></Wrapper>;
+  return (
+    <div>
+      {name && <div>{name}</div>}
+      <div>
+        <Wrapper
+          value={value}
+          key={name}
+          data-testid={name}
+          onClick={onClick}
+          style={value && color ? { backgroundColor: color, borderColor: color } : {}}
+        ></Wrapper>
+      </div>
+    </div>
+  );
 };
 
 export default CheckBox;

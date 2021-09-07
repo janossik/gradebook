@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { PropsUserListItem } from "types/types";
 import { Wrapper, Content, WrapperButton } from "./UserListItem.styles";
 
-const UsersListItem = ({ id, name, attendance, average, group }: PropsUserListItem) => {
+const UsersListItem = ({ id, name, attendance, average }: PropsUserListItem) => {
   const [users, setUsers] = useContext(UsersContext);
   const removeUser = () => {
     const filteredUsers = users.filter((user) => user.id !== id);

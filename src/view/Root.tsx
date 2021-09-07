@@ -15,7 +15,7 @@ const Authorized = () => (
               key={path}
               path={path}
               component={() => {
-                return <Redirect to="/dashboard" />;
+                return <Redirect to="/dashboard/A" />;
               }}
             />
           );

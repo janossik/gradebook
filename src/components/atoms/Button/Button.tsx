@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+const Button = styled.button<{ backgroundColor?: string; color?: string }>`
   display: block;
   min-height: 32px;
   min-width: 110px;
-  color: ${({ theme }) => theme.color.text};
-  background-color: ${({ theme }) => theme.color.background};
+  color: ${({ theme, color }) => (color ? color : theme.color.text)};
+  background-color: ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.background)};
   border: none;
   border-radius: 100px;
   transition: 300ms;

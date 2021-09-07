@@ -7,11 +7,8 @@ export const Wrapper = styled.main`
   padding: 20px 10px;
   grid-template-rows: 90px 1fr;
   grid-template-columns: 1fr 0.75fr;
-  * {
-    justify-self: center;
-  }
 
-  @media screen and (max-width: ${({ theme }) => theme.screen.tablet}) {
+  @media (max-width: ${({ theme }) => theme.screen.tablet}) {
     grid-template-columns: 1fr;
     grid-template-rows: 90px;
     gap: 20px;

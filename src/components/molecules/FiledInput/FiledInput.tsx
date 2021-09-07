@@ -1,5 +1,5 @@
 import { TypeFiledInput } from "types/types";
-import { Input } from "./FiledInput.styles";
+import { Input, Wrapper } from "./FiledInput.styles";
 
 const FiledInput: TypeFiledInput = ({
   type,
@@ -14,7 +14,7 @@ const FiledInput: TypeFiledInput = ({
   step,
 }) => {
   return (
-    <>
+    <Wrapper>
       <label htmlFor={name}>{children}</label>
       <Input
         min={min}
@@ -29,7 +29,7 @@ const FiledInput: TypeFiledInput = ({
         onChange={onChange}
         required
       />
-    </>
+    </Wrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Wrapper = styled.button<{ active?: boolean }>`
+const Wrapper = styled.button<{ active?: boolean; backgroundColor?: string; color?: string }>`
   position: fixed;
   top: 5px;
   right: 10px;
@@ -19,24 +19,24 @@ const Wrapper = styled.button<{ active?: boolean }>`
     right: -10px;
     height: 300px;
     width: 100px;
-    background: ${({ theme }) => theme.color.background};
+    background: ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.background)};
     transform: rotate(-70deg) translateX(130px) translateY(-60px);
     transition: 300ms;
     z-index: -1;
   }
   @media screen and (min-width: ${({ theme }) => theme.screen.tablet}) {
     ::after {
-      background: ${({ theme }) => theme.color.primary};
+      background: ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.primary)};
     }
   }
 `;
 
-const Body = styled.span<{ active: boolean }>`
+const Body = styled.span<{ active: boolean; backgroundColor?: string; color?: string }>`
   position: relative;
   display: block;
   height: 5px;
   min-width: 40px;
-  background: ${({ theme }) => theme.color.primary};
+  background: ${({ theme, color }) => (color ? color : theme.color.primary)};
   ::after {
     content: " ";
     position: absolute;
@@ -44,7 +44,7 @@ const Body = styled.span<{ active: boolean }>`
     left: 0;
     height: 5px;
     width: 100%;
-    background: ${({ theme }) => theme.color.primary};
+    background: ${({ theme, color }) => (color ? color : theme.color.primary)};
     transition: 300ms;
   }
   ::before {
@@ -54,20 +54,20 @@ const Body = styled.span<{ active: boolean }>`
     left: 0;
     height: 5px;
     width: 100%;
-    background: ${({ theme }) => theme.color.primary};
+    background: ${({ theme, color }) => (color ? color : theme.color.primary)};
     transition: 300ms;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.screen.tablet}) {
     ::after {
-      background: ${({ theme }) => theme.color.background};
+      background: ${({ theme, color }) => (color ? color : theme.color.background)};
     }
     ::before {
-      background: ${({ theme }) => theme.color.background};
+      background: ${({ theme, color }) => (color ? color : theme.color.background)};
     }
   }
 
-  ${({ active }) =>
+  ${({ active, color }) =>
     active
       ? css`
           position: fixed;
@@ -83,7 +83,7 @@ const Body = styled.span<{ active: boolean }>`
         `
       : css`
           @media screen and (min-width: ${({ theme }) => theme.screen.tablet}) {
-            background: ${({ theme }) => theme.color.background};
+            background: ${({ theme }) => (color ? color : theme.color.background)};
           }
         `}
 `;
@@ -91,7 +91,7 @@ const Body = styled.span<{ active: boolean }>`
 const Hamburger = (props: any) => {
   return (
     <Wrapper {...props}>
-      <Body active={props?.active} />
+      <Body {...props} active={props?.active} />
     </Wrapper>
   );
 };

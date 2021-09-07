@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
-const CloseButton = styled.button`
+const CloseButton = styled.button<{ backgroundColor?: string; color?: string }>`
   position: relative;
+  right: 10px;
   height: 30px;
   width: 30px;
-  border: solid 5px ${({ theme }) => theme.color.primary};
-  background: ${({ theme }) => theme.color.primary};
+  border: solid 5px ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.primary)};
+  background-color: ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.primary)};
   border-radius: 100%;
+  overflow: hidden;
   ::after {
     content: " ";
     position: absolute;
@@ -14,7 +16,7 @@ const CloseButton = styled.button`
     left: 50%;
     height: 3px;
     width: 110%;
-    background: ${({ theme }) => theme.color.background};
+    background: ${({ theme, color }) => (color ? color : theme.color.background)};
     transform: translate(-50%, -50%) rotate(45deg);
     transition: 300ms;
   }
@@ -25,7 +27,7 @@ const CloseButton = styled.button`
     left: 50%;
     height: 3px;
     width: 110%;
-    background: ${({ theme }) => theme.color.background};
+    background: ${({ theme, color }) => (color ? color : theme.color.background)};
     transform: translate(-50%, -50%) rotate(-45deg);
     transition: 300ms;
   }

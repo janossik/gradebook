@@ -53,20 +53,22 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div>
-      <Header
-        title="Group"
-        category={
-          <>
-            {groups.map((group) => (
-              <StyledNavLink key={group} active={group === id ? 1 : 0} to={`/dashboard/${group}`}>
-                {group}
-              </StyledNavLink>
-            ))}
-          </>
-        }
-      />
-      <UsersList id={id} />
+    <div style={{ margin: "0 auto" }}>
+      <div style={{ width: "300px" }}>
+        <Header
+          title="Group"
+          category={
+            <>
+              {groups.map((group) => (
+                <StyledNavLink key={group} active={group === id ? 1 : 0} to={`/dashboard/${group}`}>
+                  {group}
+                </StyledNavLink>
+              ))}
+            </>
+          }
+        />
+        <UsersList id={id} />
+      </div>
     </div>
   );
 };

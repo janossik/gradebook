@@ -22,4 +22,5 @@ const News = ({ title, category, content, image, alt }: NewsProps) => (
   </Wrapper>
 );
 
+
 export default News;
