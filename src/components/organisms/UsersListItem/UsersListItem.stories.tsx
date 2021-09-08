@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import UsersListItem from "./UsersListItem";
 // { id, name, attendance, average }
 export default {
-  title: "Components/Molecules/UserListItem",
+  title: "Components/Organisms/UserListItem",
   parameters: {
     backgrounds: {
       default: "background",

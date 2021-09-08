@@ -1,22 +1,24 @@
-import Header from "components/molecules/Header/Header";
-import UsersList from "components/organisms/UsersList/UsersList";
-import useStudents from "hooks/useStudents";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { NavLink, Redirect, useParams } from "react-router-dom";
 import styled, { css } from "styled-components";
+import Button from "components/atoms/Button/Button";
+import Title from "components/atoms/Title/Title";
+import Modal from "components/molecules/Modal/Modal";
+import UsersList from "components/organisms/UsersList/UsersList";
+import useStudents from "hooks/useStudents";
 
 const StyledNavLink = styled(NavLink)<{ active?: number }>`
-  display: inline-flex;
+  display: flex;
   min-height: 50px;
   min-width: 50px;
-  margin: 0 5px;
+  margin: 0 5px 20px;
   padding: 10px;
   background-color: ${({ theme }) => theme.color.background};
   color: ${({ theme }) => theme.color.text};
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  border-radius: 30%;
+  border-radius: 30px;
   transition: 300ms;
   :hover {
     background-color: ${({ theme }) => theme.color.secondary};
@@ -34,10 +36,47 @@ const StyledNavLink = styled(NavLink)<{ active?: number }>`
     `}
 `;
 
+const MenuGroup = ({
+  id,
+  groups,
+  active,
+  setActive,
+}: {
+  id: string;
+  groups: string[];
+  active: boolean;
+  setActive: Dispatch<SetStateAction<boolean>>;
+}) => {
+  return (
+    <Modal active={active} setActive={setActive} maxWidth="300px">
+      <article>
+        <header style={{ paddingBottom: "10px" }}>
+          <Title color="text">Select group</Title>
+        </header>
+        <section>
+          {groups.map((group) => (
+            <StyledNavLink
+              key={group}
+              onClick={() => {
+                setActive(false);
+              }}
+              active={group === id ? 1 : 0}
+              to={`/dashboard/${group}`}
+            >
+              {group}
+            </StyledNavLink>
+          ))}
+        </section>
+      </article>
+    </Modal>
+  );
+};
+
 const Dashboard: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [groups, setGroups] = useState<string[]>([]);
   const { getGroups } = useStudents();
+  const [activeMenuGroup, setActiveMenuGroup] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -53,23 +92,26 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div style={{ margin: "0 auto" }}>
-      <div style={{ width: "300px" }}>
-        <Header
-          title="Group"
-          category={
-            <>
-              {groups.map((group) => (
-                <StyledNavLink key={group} active={group === id ? 1 : 0} to={`/dashboard/${group}`}>
-                  {group}
-                </StyledNavLink>
-              ))}
-            </>
-          }
-        />
+    <>
+      <div style={{ width: "300px", margin: "0 auto" }}>
+        <div>
+          <div>
+            <Title>{`Group ${id}`}</Title>
+          </div>
+          <div>
+            <Button
+              onClick={() => {
+                setActiveMenuGroup(true);
+              }}
+            >
+              Change group
+            </Button>
+          </div>
+        </div>
         <UsersList id={id} />
       </div>
-    </div>
+      <MenuGroup active={activeMenuGroup} setActive={setActiveMenuGroup} id={id} groups={groups} />
+    </>
   );
 };
 

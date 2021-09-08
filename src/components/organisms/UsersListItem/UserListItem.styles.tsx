@@ -7,6 +7,7 @@ export const Wrapper = styled.section`
   grid-template-columns: 20% 80%;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 `;
 
 export const Content = styled.div`

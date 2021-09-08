@@ -27,7 +27,7 @@ const handleGroups = rest.get("/groups", (req, res, context) => {
   );
 });
 
-const handleStudents = rest.get("/students/:group", (req, res, context) => {
+const handleStudents = rest.get("/groups/:group", (req, res, context) => {
   let matchingStudents: any;
   if (req.params.group) {
     matchingStudents = students.filter((student) => student.group === req.params.group);
@@ -40,4 +40,28 @@ const handleStudents = rest.get("/students/:group", (req, res, context) => {
   );
 });
 
-export const handlers = [handleStudents, handleGroups, searchStudents];
+const handleStudent = rest.get("/students/:id", (req, res, context) => {
+  let matchingStudent: any;
+
+  if (req.params.id) {
+    matchingStudent = students.find((student) => student.id === req.params.id);
+  }
+
+  if (!matchingStudent) {
+    return res(
+      context.status(404),
+      context.json({
+        error: "Not Found"
+      })
+    );
+  }
+
+  return res(
+    context.status(200),
+    context.json({
+      student: matchingStudent,
+    })
+  );
+});
+
+export const handlers = [handleStudents, handleGroups, searchStudents, handleStudent];

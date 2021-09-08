@@ -10,6 +10,7 @@ describe("List of user", () => {
       <TestProvider>
         <>
           <UserList
+            id="A"
             users={[
               {
                 id: "1",

@@ -3,10 +3,18 @@ import { useCallback } from "react";
 import { IUser } from "types/types";
 
 const useStudents = () => {
-  const getStudents = useCallback(async (groupID = ""): Promise<IUser[] | undefined> => {
+  const getStudentsByGroup = useCallback(async (groupID = ""): Promise<IUser[] | undefined> => {
     try {
-      const { data } = await axios.get(`/students/${groupID}`);
+      const { data } = await axios.get(`/groups/${groupID}`);
       return data.students;
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+  const getStudentById = useCallback(async (studentId = ""): Promise<IUser | undefined> => {
+    try {
+      const { data } = await axios.get(`/students/${studentId}`);
+      return data.student;
     } catch (e) {
       console.error(e);
     }
@@ -21,7 +29,7 @@ const useStudents = () => {
     }
   }, []);
 
-  return { getStudents, getGroups };
+  return { getStudentsByGroup, getStudentById, getGroups };
 };
 
 export default useStudents;
