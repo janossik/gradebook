@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const CloseButton = styled.button<{ backgroundColor?: string; color?: string }>`
-  position: relative;
   right: 10px;
   height: 30px;
   width: 30px;

@@ -1,6 +1,7 @@
 import { groups } from "./../data/groups";
 import { RequestParams, rest, RestRequest } from "msw";
 import { students } from "mocks/data/students";
+import { db } from "mocks/db";
 
 const searchStudents = rest.post("/search", (req: RestRequest<{ name?: string }, RequestParams>, res, context) => {
   let matchingStudents: any;
@@ -28,40 +29,49 @@ const handleGroups = rest.get("/groups", (req, res, context) => {
 });
 
 const handleStudents = rest.get("/groups/:group", (req, res, context) => {
-  let matchingStudents: any;
   if (req.params.group) {
-    matchingStudents = students.filter((student) => student.group === req.params.group);
-  }
-  return res(
-    context.status(200),
-    context.json({
-      students: matchingStudents ? matchingStudents : students,
+    const matchingStudents = db.student.findMany({
+      where: {
+        group: {
+          equals: req.params.group
+        }
+      }
     })
-  );
+    return res(
+      context.status(200),
+      context.json({
+        students: matchingStudents ? matchingStudents : students,
+      })
+    );
+  }
 });
 
 const handleStudent = rest.get("/students/:id", (req, res, context) => {
-  let matchingStudent: any;
 
   if (req.params.id) {
-    matchingStudent = students.find((student) => student.id === req.params.id);
-  }
-
-  if (!matchingStudent) {
+    const matchingStudent = db.student.findFirst({
+      where: {
+        id: {
+          equals: req.params.id
+        }
+      }
+    })
     return res(
-      context.status(404),
+      context.status(200),
       context.json({
-        error: "Not Found"
+        student: matchingStudent,
       })
     );
   }
 
   return res(
-    context.status(200),
+    context.status(404),
     context.json({
-      student: matchingStudent,
+      error: "Not Found"
     })
   );
+
+
 });
 
 export const handlers = [handleStudents, handleGroups, searchStudents, handleStudent];

@@ -18,11 +18,15 @@ export interface PropsFiledInput {
 export type TypeFiledInput<Props = {}> = (props: Props & PropsFiledInput) => JSX.Element;
 
 export interface IUser {
-  id: string;
-  name: string;
-  attendance: string;
-  average: string;
-  group: string;
+  id: string,
+  index: string,
+  name: string,
+  attendance: string,
+  average: number,
+  group: string,
+  course: string,
+  subjects: { name: string }[],
+  grades: { id: string, subject: string, average: string }[]
 }
 
 export interface PropsUserListItem extends IUser {
@@ -41,7 +45,7 @@ export interface FontWeight {
   fontWeight?: "light" | "regular" | "medium" | "bold";
 }
 
-export interface PropsTitle extends Color, FontSize, FontWeight {}
+export interface PropsTitle extends Color, FontSize, FontWeight { }
 
 export interface NewsProps {
   id?: string;

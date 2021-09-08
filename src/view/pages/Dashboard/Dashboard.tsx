@@ -9,7 +9,7 @@ import useStudents from "hooks/useStudents";
 
 const StyledNavLink = styled(NavLink)<{ active?: number }>`
   display: flex;
-  min-height: 50px;
+  height: 50px;
   min-width: 50px;
   margin: 0 5px 20px;
   padding: 10px;

@@ -1,45 +1,10 @@
 import Score from "components/atoms/Score/Score";
 import Title from "components/atoms/Title/Title";
-import useStudents from "hooks/useStudents";
-import { useEffect, useState } from "react";
-import { IUser, PropsUserListItem } from "types/types";
+import { useState } from "react";
+import { PropsUserListItem } from "types/types";
 import Modal from "../../molecules/Modal/Modal";
+import StudentDetails from "../StudentDetails/StudentDetails";
 import { Wrapper, Content } from "./UserListItem.styles";
-
-const StudentDetails = ({ id }: { id: string }) => {
-  const { getStudentById } = useStudents();
-  const [currentStudent, setCurrentStudent] = useState<IUser>();
-
-  useEffect(() => {
-    (async () => {
-      const student = await getStudentById(id);
-      if (student) {
-        setCurrentStudent(student);
-      }
-    })();
-  }, [id, getStudentById]);
-
-  if (!currentStudent) {
-    return <></>;
-  }
-
-  return (
-    <article>
-      <header>
-        <div>
-          <Score score={currentStudent.average} />
-          <Title color="text" fontSize="l">
-            {currentStudent.name}
-          </Title>
-        </div>
-        <div>Identifier: {currentStudent.id}</div>
-        <div>Group: {currentStudent.group}</div>
-        <div>Attendance: {currentStudent.attendance}</div>
-      </header>
-      <section></section>
-    </article>
-  );
-};
 
 const UsersListItem = ({ id, name, attendance, average }: PropsUserListItem) => {
   const [active, setActive] = useState(false);
@@ -57,7 +22,7 @@ const UsersListItem = ({ id, name, attendance, average }: PropsUserListItem) => 
         }}
       >
         <div>
-          <Score score={average} />
+          <Score score={`${average}`} />
         </div>
         <Content>
           <div>

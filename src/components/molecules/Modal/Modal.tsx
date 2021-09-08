@@ -18,11 +18,35 @@ const Wrapper = styled.div<{ maxWidth?: string; minWidth?: string }>`
   position: relative;
   width: ${({ maxWidth, minWidth }) =>
     ` clamp(${minWidth ? minWidth : "280px"}, 100%, ${maxWidth ? maxWidth : "600px"})`};
-  min-height: 200px;
-  padding: 5px 20px 30px;
+  height: clamp(350px, 100%, 60%);
   margin: 0 10px;
+  padding-top: 5px;
+  padding-bottom: 30px;
   background-color: ${({ theme }) => theme.color.background};
   z-index: 100;
+  section {
+    position: relative;
+    padding: 0 10px 0;
+    height: 100%;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      margin-top: 30px;
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.color.primary};
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.color.secondary};
+    }
+  }
 `;
 
 const HeaderModal = styled.header`
@@ -30,7 +54,8 @@ const HeaderModal = styled.header`
   height: 10px;
   button {
     position: absolute;
-    right: -15px;
+    top: -45px;
+    right: -2px;
     margin-left: auto;
   }
 `;
@@ -83,7 +108,7 @@ const RenderModal = ({ setActive, children, maxWidth, minWidth }: IModal) => {
           <HeaderModal>
             <CloseButton onClick={() => setActive(false)} />
           </HeaderModal>
-          {children}
+          <section>{children}</section>
         </Wrapper>
       </Background>
     </>,
