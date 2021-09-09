@@ -48,7 +48,7 @@ const MenuGroup = ({
   setActive: Dispatch<SetStateAction<boolean>>;
 }) => {
   return (
-    <Modal active={active} setActive={setActive} maxWidth="300px">
+    <Modal active={active} setActive={setActive} maxWidth="300px" maxHeight="300px">
       <article>
         <header style={{ paddingBottom: "10px" }}>
           <Title color="text">Select group</Title>

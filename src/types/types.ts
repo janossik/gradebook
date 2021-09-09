@@ -29,6 +29,14 @@ export interface IUser {
   grades: { id: string, subject: string, average: string }[]
 }
 
+export interface ITeacher {
+  id: string,
+  name: string,
+  subjects: { name: string }[],
+  login: string,
+  password: string
+}
+
 export interface PropsUserListItem extends IUser {
   consents?: boolean;
 }

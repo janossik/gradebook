@@ -1,24 +1,37 @@
 import axios from "axios";
 import { createContext, FC, useEffect, useState } from "react";
-import { IUser } from "types/types";
+import { ITeacher } from "types/types";
 
-export const UsersContext = createContext<[IUser[], (users: IUser[]) => void]>([[], () => {}]);
+export const UsersContext = createContext<[ITeacher | null, (users: ITeacher) => void]>([null, () => {}]);
 
 const UsersProvider: FC = ({ children }) => {
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [authorizedUser, setAuthorizedUser] = useState<ITeacher | null>(null);
 
   useEffect(() => {
-    axios.get("/students").then(({ data: { students } }) => {
-      setUsers(students);
-    });
+    (async () => {
+      try {
+        const token = localStorage.getItem("token");
+        axios
+          .get("/me", {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            setAuthorizedUser(response.data);
+          });
+      } catch (e) {
+        console.error(e);
+      }
+    })();
     return () => {};
   }, []);
 
-  const handlerUsers = (users: IUser[]) => {
-    setUsers(users);
+  const handlerUser = (user: ITeacher) => {
+    setAuthorizedUser(user);
   };
 
-  return <UsersContext.Provider value={[users, handlerUsers]}>{children}</UsersContext.Provider>;
+  return <UsersContext.Provider value={[authorizedUser, handlerUser]}>{children}</UsersContext.Provider>;
 };
 
 export default UsersProvider;

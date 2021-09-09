@@ -10,6 +10,14 @@ const Menu = () => {
           {name}
         </MenuLink>
       ))}
+      <MenuLink
+        to={"/"}
+        onClick={() => {
+          localStorage.clear();
+        }}
+      >
+        log out
+      </MenuLink>
     </Wrapper>
   );
 };

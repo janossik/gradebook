@@ -14,39 +14,24 @@ const Background = styled.div`
   z-index: 99;
 `;
 
-const Wrapper = styled.div<{ maxWidth?: string; minWidth?: string }>`
+const Wrapper = styled.div<{ maxHeight?: string; maxWidth?: string; minWidth?: string }>`
   position: relative;
   width: ${({ maxWidth, minWidth }) =>
     ` clamp(${minWidth ? minWidth : "280px"}, 100%, ${maxWidth ? maxWidth : "600px"})`};
-  height: clamp(350px, 100%, 60%);
+
+  height: clamp(300px, 100%, ${({ maxHeight }) => (maxHeight ? maxHeight : "70%")});
   margin: 0 10px;
   padding-top: 5px;
   padding-bottom: 30px;
   background-color: ${({ theme }) => theme.color.background};
   z-index: 100;
-  section {
-    position: relative;
-    padding: 0 10px 0;
-    height: 100%;
-    overflow-y: auto;
-    ::-webkit-scrollbar {
-    }
-    /* Track */
-    ::-webkit-scrollbar-track {
-      margin-top: 30px;
-      background: #f1f1f1;
-    }
+`;
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.color.primary};
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: ${({ theme }) => theme.color.secondary};
-    }
-  }
+const WrapperContent = styled.section`
+  position: relative;
+  height: 100%;
+  padding: 0 10px 0;
+  overflow-y: auto;
 `;
 
 const HeaderModal = styled.header`
@@ -68,6 +53,7 @@ interface IModal {
   children: JSX.Element;
   maxWidth?: string;
   minWidth?: string;
+  maxHeight?: string;
 }
 
 const useCloseModalIfClickBackground = (
@@ -88,7 +74,7 @@ const useCloseModalIfClickBackground = (
   }, [refTargetClose, setActive]);
 };
 
-const RenderModal = ({ setActive, children, maxWidth, minWidth }: IModal) => {
+const RenderModal = ({ setActive, children, maxWidth, minWidth, maxHeight }: IModal) => {
   const modalNode = document.createElement("div");
   const ref = useRef<HTMLDivElement>(null);
   useCloseModalIfClickBackground(ref, setActive);
@@ -104,11 +90,11 @@ const RenderModal = ({ setActive, children, maxWidth, minWidth }: IModal) => {
   return createPortal(
     <>
       <Background ref={ref}>
-        <Wrapper maxWidth={maxWidth} minWidth={minWidth}>
+        <Wrapper maxWidth={maxWidth} minWidth={minWidth} maxHeight={maxHeight}>
           <HeaderModal>
             <CloseButton onClick={() => setActive(false)} />
           </HeaderModal>
-          <section>{children}</section>
+          <WrapperContent>{children}</WrapperContent>
         </Wrapper>
       </Background>
     </>,
@@ -116,10 +102,10 @@ const RenderModal = ({ setActive, children, maxWidth, minWidth }: IModal) => {
   );
 };
 
-const Modal = ({ active, setActive, children, maxWidth, minWidth }: IModal) => (
+const Modal = ({ active, setActive, children, maxWidth, minWidth, maxHeight }: IModal) => (
   <>
     {active ? (
-      <RenderModal setActive={setActive} maxWidth={maxWidth} minWidth={minWidth}>
+      <RenderModal setActive={setActive} maxWidth={maxWidth} minWidth={minWidth} maxHeight={maxHeight}>
         {children}
       </RenderModal>
     ) : null}

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   display: grid;
-  min-height: 80px;
+  height: 80px;
   width: clamp(260px, 100%, 300px);
   grid-template-columns: 20% 80%;
   align-items: center;

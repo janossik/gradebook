@@ -44,6 +44,13 @@ const handleStudents = rest.get("/groups/:group", (req, res, context) => {
       })
     );
   }
+  return res(
+    context.status(404),
+    context.json({
+      error: "Not Found"
+    })
+  );
+
 });
 
 const handleStudent = rest.get("/students/:id", (req, res, context) => {

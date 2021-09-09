@@ -19,6 +19,8 @@ faker.seed(123);
 const getRadomAverage = () => faker.datatype.number({ min: 1, max: 6, precision: 0.5 })
 const groups = ["A", "B", "C"]
 const getRandomGroup = () => groups[faker.datatype.number({ min: 0, max: 2 })]
+const getRandomValue = (array: any[], index: number) => array[index];
+const eventTypes = ['workshop', 'exam', 'lecture'];
 
 const subjects = [{
     name: "economy"
@@ -71,7 +73,55 @@ export const db = factory({
                 subject: getRandomSubject().name,
                 average: getRadomAverage()
             },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
+            {
+                id: Math.round(Math.random() * Math.pow(10, 10)).toString(16),
+                subject: getRandomSubject().name,
+                average: getRadomAverage()
+            },
         ]
-    }
-})
+    },
+    teacher: {
+        id: primaryKey(faker.datatype.uuid),
+        name: () => faker.fake(`{{name.firstName}} {{name.lastName}}`),
+        subjects: () => subjects,
+        login: () => 'teacher@react.com',
+        password: () => '1234',
+    },
+    event: {
+        id: primaryKey(faker.datatype.uuid),
+        type: () => getRandomValue(eventTypes, faker.datatype.number({ min: 0, max: 2 })),
+        group: () => getRandomValue(groups, faker.datatype.number({ min: 0, max: 2 })),
+        subject: () => faker.fake('{{company.bsAdjective}} {{company.bsNoun}}'),
+        date: faker.date.soon,
+    }, note: {
+        id: primaryKey(faker.datatype.uuid),
+        title: () => 'Lorem ipsum dolor sit amet',
+        content: () => 'Lorem ipsum dolor sit amet',
+    },
+});
 
