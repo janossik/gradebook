@@ -7,5 +7,5 @@ export const teacher = {
     name: () => faker.fake(`{{name.firstName}} {{name.lastName}}`),
     subjects: () => subjects,
     login: () => 'teacher@react.com',
-    password: () => '1234',
+    password: () => 'Hard123Hard',
 };

@@ -1,41 +1,38 @@
 import Score from "components/atoms/Score/Score";
 import Title from "components/atoms/Title/Title";
-import { useState } from "react";
 import { PropsUserListItem } from "types/types";
-import Modal from "../../molecules/Modal/Modal";
-import StudentDetails from "../StudentDetails/StudentDetails";
+import ModalDetailsUser from "../ModalStudentDetails/ModalStudentDetails";
 import { Wrapper, Content } from "./UserListItem.styles";
 
-const UsersListItem = ({ id, name, attendance, average }: PropsUserListItem) => {
-  const [active, setActive] = useState(false);
+const UsersListItem = ({ id, name, attendance, grades }: PropsUserListItem) => {
   return (
     <>
-      {id && (
-        <Modal active={active} setActive={setActive}>
-          <StudentDetails id={id} />
-        </Modal>
-      )}
-      <Wrapper
-        data-testid="user"
-        onClick={() => {
-          setActive(true);
-        }}
-      >
+      <Wrapper data-testid="user">
         <div>
-          <Score score={`${average}`} />
+          <Score
+            score={`${
+              grades[0]
+                ? (
+                    grades
+                      .map((grade) => {
+                        return grade.average;
+                      })
+                      .reduce((pv, v) => pv + v) / grades.length
+                  ).toFixed(2)
+                : 0
+            }`}
+          />
         </div>
         <Content>
           <div>
             <Title color="text" fontSize="s" capitalize>
               {name}
             </Title>
-            <Title color="text" fontSize="xs" fontWeight="regular">
-              {attendance}
+            <Title color="text" fontSize="xs" fontWeight="regular" capitalize>
+              attendance:{attendance}
             </Title>
           </div>
-          {/*          <WrapperButton>
-            <CloseButton onClick={removeUser} />
-          </WrapperButton> */}
+          <ModalDetailsUser id={id} />
         </Content>
       </Wrapper>
     </>

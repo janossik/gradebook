@@ -5,7 +5,7 @@ export const Wrapper = styled.article`
   flex-direction: column;
   padding: 30px 20px;
   margin-bottom: 20px;
-  background-color: rgba(170, 170, 170, 0.3);
+  background-color: rgba(180, 180, 180, 0.4);
   border-radius: 20px;
   gap: 15px;
   line-height: 1.5;

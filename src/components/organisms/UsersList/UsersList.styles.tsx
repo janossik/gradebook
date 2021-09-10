@@ -5,6 +5,8 @@ export const Wrapper = styled.article`
   display: grid;
   height: calc(90vh - 110px);
   min-width: 350px;
+
+  padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   gap: 10px;

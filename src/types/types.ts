@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 export type TypeHandleInput = (e: ChangeEvent<HTMLInputElement>, setValue: Dispatch<SetStateAction<string>>) => void;
 
@@ -26,7 +26,7 @@ export interface IUser {
   group: string,
   course: string,
   subjects: { name: string }[],
-  grades: { id: string, subject: string, average: string }[]
+  grades: { id: string, subject: string, average: number }[]
 }
 
 export interface ITeacher {
@@ -52,6 +52,10 @@ export interface FontSize {
 export interface FontWeight {
   fontWeight?: "light" | "regular" | "medium" | "bold";
 }
+export interface Inputs {
+  login: string;
+  password: string;
+}
 
 export interface PropsTitle extends Color, FontSize, FontWeight { }
 
@@ -62,4 +66,38 @@ export interface NewsProps {
   content: string;
   image?: { url: string };
   alt?: string;
+}
+
+export interface IMenuGroup {
+  id: string;
+  groups: string[];
+  active: boolean;
+  setActive: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IModal {
+  active?: boolean;
+  children: JSX.Element;
+  maxWidth?: string;
+  minWidth?: string;
+  maxHeight?: string;
+  closeAction: () => void;
+}
+export interface IHeader {
+  title: string;
+  category: string | JSX.Element;
+  children?: JSX.Element;
+}
+
+export interface IMenuLink {
+  to: string;
+  children: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+}
+
+export interface IListGrades {
+  isShow?: boolean;
+  handleShow?: () => void;
+  title?: string;
+  grades: { id: string; subject: string; average: number }[];
 }

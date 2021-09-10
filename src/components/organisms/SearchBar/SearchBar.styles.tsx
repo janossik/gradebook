@@ -42,8 +42,10 @@ export const ListUsersSearchedItem = styled.div<{ idHighlightedIndex: boolean }>
   cursor: default;
   text-transform: capitalize;
   :hover {
-    background: ${({ theme, idHighlightedIndex }) =>
-      idHighlightedIndex ? theme.color.secondary : "rgba(0, 0, 0, 0.1)"};
-    border-bottom: solid ${({ theme }) => theme.color.secondary} 2px;
+    background: ${({ theme, idHighlightedIndex }) => (idHighlightedIndex ? theme.color.primary : "rgba(0, 0, 0, 0.1)")};
+    border-bottom: solid ${({ theme }) => theme.color.primary} 2px;
+  }
+  button {
+    margin: 0 10px 0 20px;
   }
 `;

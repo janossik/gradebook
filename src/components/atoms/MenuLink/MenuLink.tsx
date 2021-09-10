@@ -1,15 +1,7 @@
-import { MouseEventHandler } from "react";
+import { IMenuLink } from "types/types";
 import { Wrapper, BodyLink } from "./MenuLink.styles";
 
-const MenuLink = ({
-  to,
-  children,
-  onClick,
-}: {
-  to: string;
-  children: string;
-  onClick?: MouseEventHandler<HTMLDivElement>;
-}) => {
+const MenuLink = ({ to, children, onClick }: IMenuLink) => {
   return (
     <Wrapper onClick={onClick}>
       <BodyLink to={to}>{children}</BodyLink>

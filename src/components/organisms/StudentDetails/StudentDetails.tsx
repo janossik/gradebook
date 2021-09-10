@@ -4,6 +4,8 @@ import useStudents from "hooks/useStudents";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IUser } from "types/types";
+import { getAverage, getAverages } from "utils/utils";
+import { ListGrades } from "components/molecules/ListGrades/ListGrades";
 
 const Wrapper = styled.article`
   display: grid;
@@ -24,15 +26,19 @@ const HeaderStudentDetails = styled.header`
   }
 `;
 
-const StudentDetails = ({ id }: { id: string }) => {
+const StudentDetails = ({ id, showAll }: { id: string; showAll?: boolean }) => {
   const { getStudentById } = useStudents();
+  const [showAllGrades, setShowAllGrades] = useState(showAll || false);
   const [currentStudent, setCurrentStudent] = useState<IUser>();
+  const [grades, setGrades] = useState<{ id: string; subject: string; average: number }[]>([]);
 
   useEffect(() => {
     (async () => {
       const student = await getStudentById(id);
       if (student) {
         setCurrentStudent(student);
+
+        setGrades(getAverages(student.grades));
       }
     })();
   }, [id, getStudentById]);
@@ -45,8 +51,8 @@ const StudentDetails = ({ id }: { id: string }) => {
     <Wrapper>
       <HeaderStudentDetails>
         <section>
-          <Score score={`${currentStudent.average}`} />
-          <Title color="text" fontSize="m" as="p">
+          <Score score={`${getAverage(grades)}`} />
+          <Title color="text" fontSize="l" as="p" capitalize>
             {currentStudent.name}
           </Title>
         </section>
@@ -61,26 +67,18 @@ const StudentDetails = ({ id }: { id: string }) => {
           <Title color="text" fontSize="s" as="p">
             Course:
           </Title>
-          <Title color="text" fontSize="m" fontWeight="light">
+          <Title color="text" fontSize="m" fontWeight="light" capitalize>
             {currentStudent.course}
           </Title>
         </div>
-        <div>
-          <Title color="text" fontSize="s" as="p">
-            Recent grades:
-          </Title>
-          <div>
-            {currentStudent.grades.map((garde) => {
-              return (
-                <div
-                  key={garde.id}
-                  style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "20px" }}
-                >
-                  {garde.subject}:<Score score={`${garde.average}`} />
-                </div>
-              );
-            })}
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <ListGrades title="Average grades:" grades={grades} />
+          <ListGrades
+            title="All grades:"
+            grades={currentStudent.grades}
+            isShow={showAllGrades}
+            handleShow={() => setShowAllGrades(!showAllGrades)}
+          />
         </div>
       </section>
     </Wrapper>
