@@ -1,8 +1,10 @@
 import MenuLink from "components/atoms/MenuLink/MenuLink";
+import { useAuth } from "hooks/useAuth";
 import pages from "utils/pages";
 import { Wrapper } from "./Menu.styles";
 
 const Menu = () => {
+  const { singOut } = useAuth();
   return (
     <Wrapper>
       {pages.map(({ path, name, menuPath }) => (
@@ -10,12 +12,7 @@ const Menu = () => {
           {name}
         </MenuLink>
       ))}
-      <MenuLink
-        to={"/"}
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
+      <MenuLink to={"/"} onClick={singOut}>
         log out
       </MenuLink>
     </Wrapper>

@@ -40,6 +40,7 @@ export const ListUsersSearchedItem = styled.div<{ idHighlightedIndex: boolean }>
   justify-content: center;
   align-items: center;
   cursor: default;
+  text-transform: capitalize;
   :hover {
     background: ${({ theme, idHighlightedIndex }) =>
       idHighlightedIndex ? theme.color.secondary : "rgba(0, 0, 0, 0.1)"};

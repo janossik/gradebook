@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.section`
   display: grid;
   height: 80px;
-  width: clamp(260px, 100%, 300px);
+  width: 100%;
   grid-template-columns: 20% 80%;
   align-items: center;
   gap: 10px;

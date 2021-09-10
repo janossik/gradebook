@@ -1,6 +1,6 @@
 import { RequestParams, rest, RestRequest } from 'msw';
 import { db } from 'mocks/db';
-import { authenticateRequest } from 'mocks/helpers';
+import { authenticateRequest } from 'mocks/helper/helper';
 
 const sanitizeUser = (user: any) => {
     const { password, ...rest } = user;

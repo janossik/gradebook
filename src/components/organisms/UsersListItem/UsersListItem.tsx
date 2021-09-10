@@ -26,7 +26,7 @@ const UsersListItem = ({ id, name, attendance, average }: PropsUserListItem) => 
         </div>
         <Content>
           <div>
-            <Title color="text" fontSize="s">
+            <Title color="text" fontSize="s" capitalize>
               {name}
             </Title>
             <Title color="text" fontSize="xs" fontWeight="regular">
