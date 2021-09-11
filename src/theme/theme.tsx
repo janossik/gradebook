@@ -6,6 +6,7 @@ declare module "styled-components" {
       primary: string;
       secondary: string;
       trinary: string;
+      error: string;
       background: string;
       text: string;
     };
@@ -37,7 +38,8 @@ export const theme = {
   color: {
     primary: "#23b2ee",
     secondary: "#838BD0",
-    trinary: "#76DF74",
+    trinary: "#76df74",
+    error: "rgb(250, 130, 130)",
     background: "snow",
     text: "#737c8e",
   },

@@ -42,7 +42,7 @@ export interface PropsUserListItem extends IUser {
 }
 
 export interface Color {
-  color?: "primary" | "secondary" | "trinary" | "background" | "text";
+  color?: "primary" | "secondary" | "trinary" | "background" | "text" | "error";
 }
 
 export interface FontSize {
@@ -100,4 +100,9 @@ export interface IListGrades {
   handleShow?: () => void;
   title?: string;
   grades: { id: string; subject: string; average: number }[];
+}
+
+export interface IAlert {
+  title?: string;
+  message: string;
 }

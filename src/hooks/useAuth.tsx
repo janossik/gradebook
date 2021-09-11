@@ -1,6 +1,7 @@
 import axios from "axios";
-import { createContext, FC, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ITeacher } from "types/types";
+import { useError } from "./useError";
 
 export const AuthContext = createContext<{
   authUser: ITeacher | null;
@@ -8,9 +9,9 @@ export const AuthContext = createContext<{
   singOut: () => Promise<void>;
 }>({ authUser: null, signIn: async () => {}, singOut: async () => {} });
 
-export const AuthProvider: FC = ({ children }) => {
+export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [authUser, setAuthUser] = useState<ITeacher | null>(null);
-
+  const [, dispatchError] = useError();
   useEffect(() => {
     (async () => {
       try {
@@ -23,10 +24,10 @@ export const AuthProvider: FC = ({ children }) => {
         const { data } = await axios.get("/me", configQuery);
         setAuthUser(data);
       } catch (e) {
-        console.error(e);
+        //dispatchError({ message: "Your token don't work :/" });
       }
     })();
-  }, []);
+  }, [dispatchError]);
 
   const signIn = async ({ login, password }: { login: string; password: string }) => {
     try {
@@ -38,7 +39,7 @@ export const AuthProvider: FC = ({ children }) => {
       setAuthUser(data);
       localStorage.setItem("token", data.token);
     } catch (e) {
-      console.error(e);
+      dispatchError({ message: "You give didn't correct login or password" });
     }
   };
 

@@ -1,15 +1,17 @@
 import { AuthProvider } from "hooks/useAuth";
-import { FC } from "react";
 import { BrowserRouter } from "react-router-dom";
 import StyledProvider from "providers/StyledProvider";
+import { ErrorProvider } from "hooks/useError";
 
-const AppProvider: FC = ({ children }) => {
+const AppProvider = ({ children }: { children: JSX.Element }) => {
   return (
-    <BrowserRouter>
-      <StyledProvider>
-        <AuthProvider>{children}</AuthProvider>
-      </StyledProvider>
-    </BrowserRouter>
+    <ErrorProvider>
+      <BrowserRouter>
+        <StyledProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </StyledProvider>
+      </BrowserRouter>
+    </ErrorProvider>
   );
 };
 

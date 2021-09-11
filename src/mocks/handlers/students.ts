@@ -32,6 +32,14 @@ const getAllStudentFromCurrentGroup = rest.get("/groups/:group", (req, res, cont
                 }
             }
         })
+        if (!matchingStudents[0]) {
+            return res(
+                context.status(404),
+                context.json({
+                    error: "Not Found"
+                })
+            );
+        }
         return res(
             context.status(200),
             context.json({
