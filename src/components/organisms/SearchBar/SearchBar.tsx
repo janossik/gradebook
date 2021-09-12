@@ -35,7 +35,7 @@ const SearchBar = () => {
                 onClick={() => {}}
               >
                 {item.name}
-                <ModalDetailsUser id={item.id} showAll={true} />
+                <ModalDetailsUser {...item} showAll={true} />
               </ListUsersSearchedItem>
             );
           })}

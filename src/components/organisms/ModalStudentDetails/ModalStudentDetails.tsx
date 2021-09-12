@@ -2,15 +2,16 @@ import { useState } from "react";
 import Button from "components/atoms/Button/Button";
 import Modal from "components/molecules/Modal/Modal";
 import StudentDetails from "../StudentDetails/StudentDetails";
+import { PropsUserListItem } from "types/types";
 
-const ModalStudentDetails = ({ id, showAll }: { id: string; showAll?: boolean }) => {
+const ModalStudentDetails = (props: PropsUserListItem) => {
   const [active, setActive] = useState(false);
   return (
     <>
-      {id && (
+      {props.id && (
         <>
           <Modal active={active} closeAction={() => setActive(false)}>
-            <StudentDetails id={id} showAll={showAll} />
+            <StudentDetails {...props} />
           </Modal>
           <Button onClick={() => setActive(true)}>show</Button>
         </>

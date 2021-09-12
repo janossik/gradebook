@@ -38,7 +38,7 @@ export interface ITeacher {
 }
 
 export interface PropsUserListItem extends IUser {
-  consents?: boolean;
+  consents?: boolean; showAll?: boolean
 }
 
 export interface Color {

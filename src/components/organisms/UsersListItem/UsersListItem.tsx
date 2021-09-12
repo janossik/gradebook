@@ -1,27 +1,17 @@
 import Score from "components/atoms/Score/Score";
 import Title from "components/atoms/Title/Title";
 import { PropsUserListItem } from "types/types";
+import { getAverage } from "utils/utils";
 import ModalDetailsUser from "../ModalStudentDetails/ModalStudentDetails";
 import { Wrapper, Content } from "./UserListItem.styles";
 
-const UsersListItem = ({ id, name, attendance, grades }: PropsUserListItem) => {
+const UsersListItem = (props: PropsUserListItem) => {
+  const { name, attendance, grades } = props;
   return (
     <>
       <Wrapper data-testid="user">
         <div>
-          <Score
-            score={`${
-              grades[0]
-                ? (
-                    grades
-                      .map((grade) => {
-                        return grade.average;
-                      })
-                      .reduce((pv, v) => pv + v) / grades.length
-                  ).toFixed(2)
-                : 0
-            }`}
-          />
+          <Score score={`${getAverage(grades)}`} />
         </div>
         <Content>
           <div>
@@ -32,7 +22,7 @@ const UsersListItem = ({ id, name, attendance, grades }: PropsUserListItem) => {
               attendance:{attendance}
             </Title>
           </div>
-          <ModalDetailsUser id={id} />
+          <ModalDetailsUser {...props} />
         </Content>
       </Wrapper>
     </>
