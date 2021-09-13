@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import TestProvider from "providers/TestProvider";
+import AppProvider from "providers/AppProvider";
 
 const AllTheProviders = ({ children }: { children: JSX.Element }) => {
   return (
     <>
-      <TestProvider>{children}</TestProvider>
+      <AppProvider>{children}</AppProvider>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import UsersListItem from "components/organisms/UsersListItem/UsersListItem";
+import { useError } from "hooks/useError";
 import useStudents from "hooks/useStudents";
 import { useState, useEffect } from "react";
 import { IUser } from "types/types";
@@ -6,20 +7,26 @@ import { Wrapper } from "./UsersList.styles";
 
 const UserList = ({ id, users }: { id: string; users?: IUser[] }) => {
   const { getStudentsByGroup } = useStudents();
-  const [students, setStudents] = useState<IUser[]>(users || []);
-
+  const [students, setStudents] = useState<IUser[]>([]);
+  const [, dispatchError] = useError();
   useEffect(() => {
-    (async () => {
-      const students = await getStudentsByGroup(id);
-      if (students) {
-        setStudents(students);
-      } else {
-        if (users) {
-          setStudents(users.filter((item) => item.group === id));
-        }
+    if (!users) {
+      try {
+        (async () => {
+          const students = await getStudentsByGroup(id);
+          if (students) {
+            setStudents(students);
+          } else {
+          }
+          return () => {};
+        })();
+      } catch (e) {
+        dispatchError({ message: "You can't get users from the group" });
       }
-    })();
-  }, [id, getStudentsByGroup, users]);
+    } else {
+      setStudents(users.filter((item) => item.group === id));
+    }
+  }, [id, getStudentsByGroup, users, dispatchError]);
 
   return (
     <>

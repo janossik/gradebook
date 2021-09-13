@@ -7,7 +7,7 @@ const sanitizeUser = (user: any) => {
     return rest;
 };
 
-export const auth = [
+export const handlersAuth = [
     rest.post('/login', (req: RestRequest<{ login?: string, password?: string }, RequestParams>, res, ctx) => {
         const user = db.teacher.findFirst({
             where: {
