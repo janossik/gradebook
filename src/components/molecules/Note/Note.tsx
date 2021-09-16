@@ -1,4 +1,5 @@
-import { removeNote } from "actions/actions";
+import { removeNote } from "store/store";
+import CloseButton from "components/atoms/CloseButton/CloseButton";
 import Title from "components/atoms/Title/Title";
 import { useDispatch } from "react-redux";
 import { INote } from "types/types";
@@ -11,22 +12,17 @@ const Note = (props: INote) => {
     dispatch(removeNote(props));
   };
   return (
-    <article>
-      <header style={{ display: "flex" }}>
-        <span
-          style={{
-            marginBottom: "auto",
-            marginRight: "10px",
-            padding: "5px 10px",
-            border: "1px solid black",
-            borderRadius: "10px",
-            cursor: "pointer",
-            userSelect: "none",
-          }}
-          onClick={handleRemoveNote}
-        >
-          X
-        </span>
+    <article style={{ marginBottom: "20px" }}>
+      <header
+        style={{
+          position: "relative",
+          display: "flex",
+          marginLeft: "5px",
+          marginBottom: "5px",
+          alignItems: "center",
+        }}
+      >
+        <CloseButton onClick={handleRemoveNote} />
         <Title as="h3" fontSize="s" capitalize>
           {title}
         </Title>

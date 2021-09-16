@@ -65,6 +65,10 @@ export interface Inputs {
   login: string;
   password: string;
 }
+export interface NoteWithoutId {
+  title: string;
+  content: string;
+}
 
 export interface PropsTitle extends Color, FontSize, FontWeight {}
 

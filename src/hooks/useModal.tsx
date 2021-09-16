@@ -17,7 +17,7 @@ const useModal = (closeAction: () => void) => {
     return () => {
       current.removeEventListener("click", closeModal);
     };
-  }, [ref, closeAction]);
+  }, [closeAction]);
 
   useEffect(() => {
     if (!modalContainer) return;
@@ -28,7 +28,7 @@ const useModal = (closeAction: () => void) => {
     };
   }, [modalNode]);
 
-  return { modalNode, ref };
+  return { ref, modalNode };
 };
 
 export default useModal;

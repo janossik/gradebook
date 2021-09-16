@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const CloseButton = styled.button<{ backgroundColor?: string; color?: string }>`
-  right: 10px;
+  position: relative;
   height: 30px;
-  width: 30px;
+  min-width: 30px;
+  margin-right: 10px;
   border: solid 5px ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.primary)};
   background-color: ${({ theme, backgroundColor }) => (backgroundColor ? backgroundColor : theme.color.primary)};
   border-radius: 100%;
