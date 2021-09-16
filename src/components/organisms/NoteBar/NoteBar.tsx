@@ -1,26 +1,26 @@
 import Note from "components/molecules/Note/Note";
 import useHandleModal from "hooks/useHandleModal";
 import { RefObject } from "react";
-import { useSelector } from "react-redux";
-import { IGlobalState, INote } from "types/types";
+import { useGetNotesQuery } from "store/store";
+import { INote } from "types/types";
 import { Tag, Wrapper } from "./NoteBar.styles";
 
 const NoteBar = () => {
-  const notes = useSelector<IGlobalState, INote[]>((state) => state.notes);
   const { visible, ref, inverse } = useHandleModal(false);
+  const { data, isLoading } = useGetNotesQuery<{ data: { notes: INote[] }; isLoading: boolean }>({});
 
   return (
     <>
-      {notes.length ? (
+      {isLoading ? null : (
         <Wrapper ref={ref as RefObject<HTMLDivElement>} visible={visible}>
           <Tag onClick={inverse}>notes</Tag>
           <div>
-            {notes.map((note) => (
+            {data.notes.map((note) => (
               <Note key={note.id} {...note} />
             ))}
           </div>
         </Wrapper>
-      ) : null}
+      )}
     </>
   );
 };

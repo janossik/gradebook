@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { addNote } from "store/store";
+import { useAddNoteMutation } from "store/store";
 import Input from "components/atoms/Input/Input";
 import Textarea from "components/atoms/Textarea/Textarea";
 import Button from "components/atoms/Button/Button";
@@ -12,10 +11,11 @@ enum NotesInputsKey {
 }
 
 const NoteForm = () => {
-  const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm<NoteWithoutId>();
-  const handleAddNote = (data: NoteWithoutId) => {
-    dispatch(addNote(data));
+  const [addNote] = useAddNoteMutation({});
+
+  const handleAddNote = async (data: NoteWithoutId) => {
+    await addNote(data);
     reset();
   };
   return (

@@ -1,15 +1,13 @@
-import { removeNote } from "store/store";
+import { useRemoveNoteMutation } from "store/store";
 import CloseButton from "components/atoms/CloseButton/CloseButton";
 import Title from "components/atoms/Title/Title";
-import { useDispatch } from "react-redux";
 import { INote } from "types/types";
 
 const Note = (props: INote) => {
   const { title, content } = props;
-  const dispatch = useDispatch();
-
+  const [removeNote] = useRemoveNoteMutation({});
   const handleRemoveNote = () => {
-    dispatch(removeNote(props));
+    removeNote({ id: props.id });
   };
   return (
     <article style={{ marginBottom: "20px" }}>

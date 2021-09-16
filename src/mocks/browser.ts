@@ -14,7 +14,6 @@ const seed = () => {
   createStudents();
   db.teacher.create();
   db.groups.create();
-  db.note.create();
   db.event.create();
   db.note.create({
     title: "You need to prepare your exam next week",

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Note from "components/molecules/Note/Note";
-import { useSelector } from "react-redux";
-import { IGlobalState, INote } from "types/types";
+import { INote } from "types/types";
 import NoteForm from "components/organisms/NoteForm/NoteForm";
+import { useGetNotesQuery } from "store/store";
 
 const Wrapper = styled.article`
   display: grid;
@@ -17,16 +17,21 @@ const Wrapper = styled.article`
 `;
 
 const Notes = () => {
-  const notes = useSelector<IGlobalState, INote[]>((state) => state.notes);
-
+  const { data, isLoading } = useGetNotesQuery<{ data: { notes: INote[] }; isLoading: boolean }>({});
   return (
     <Wrapper>
       <NoteForm />
       <section>
-        {notes.length ? (
-          notes.map((note) => <Note key={note.id} {...note} />)
+        {isLoading ? (
+          <div>Loading...</div>
         ) : (
-          <div>Nie masz aktualnie, żadnych notatek</div>
+          <>
+            {data.notes.length ? (
+              data.notes.map((note) => <Note key={note.id} {...note} />)
+            ) : (
+              <div>You can add new note</div>
+            )}
+          </>
         )}
       </section>
     </Wrapper>
