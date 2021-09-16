@@ -1,17 +1,21 @@
-import { AuthProvider } from "hooks/useAuth";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { AuthProvider } from "hooks/useAuth";
 import StyledProvider from "providers/StyledProvider";
 import { ErrorProvider } from "hooks/useError";
+import { store } from "store/store";
 
 const AppProvider = ({ children }: { children: JSX.Element }) => {
   return (
-    <ErrorProvider>
+    <Provider store={store}>
       <BrowserRouter>
-        <StyledProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </StyledProvider>
+        <ErrorProvider>
+          <StyledProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </StyledProvider>
+        </ErrorProvider>
       </BrowserRouter>
-    </ErrorProvider>
+    </Provider>
   );
 };
 

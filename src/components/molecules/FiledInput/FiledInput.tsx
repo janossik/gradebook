@@ -1,5 +1,6 @@
+import Input from "components/atoms/Input/Input";
 import { TypeFiledInput } from "types/types";
-import { Input, Wrapper } from "./FiledInput.styles";
+import { Wrapper } from "./FiledInput.styles";
 
 const FiledInput: TypeFiledInput = ({
   type,

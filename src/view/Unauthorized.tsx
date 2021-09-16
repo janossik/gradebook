@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "hooks/useAuth";
 import { Inputs } from "types/types";
-import { Input } from "components/molecules/FiledInput/FiledInput.styles";
 import Button from "components/atoms/Button/Button";
 import styled from "styled-components";
 import { theme } from "theme/theme";
+import Input from "components/atoms/Input/Input";
 
 const Wrapper = styled.form`
   position: absolute;

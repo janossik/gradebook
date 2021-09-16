@@ -1,4 +1,4 @@
-import GradesPage from "view/pages/GradesPage/GradesPage";
+import Notes from "view/pages/Notes/Notes";
 import Dashboard from "view/pages/Dashboard/Dashboard";
 
 interface websiteItem {
@@ -9,11 +9,10 @@ interface websiteItem {
 }
 
 const pages: websiteItem[] = [
-  { View: Dashboard, path: "/dashboard/:id?", menuPath: "/dashboard/A", name: "dashboard" },
-  { View: GradesPage, path: "/grades", name: "grades" },
+  { View: Dashboard, path: "/dashboard/:id?", menuPath: "/dashboard", name: "dashboard" },
+  { View: Notes, path: "/notes", name: "notes" },
 ];
 
 //Login page must be last element for pages array
-//pages.push({ View: LoginPage, path: "/", name: "log out" });
 
 export default pages;

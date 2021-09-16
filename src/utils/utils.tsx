@@ -1,5 +1,10 @@
 import { TypeHandleInput } from "types/types";
 
+export enum TypeActions {
+  ADD_NOTE = "note/add",
+  REMOVE_NOTE = "note/remove",
+}
+
 export const handleInput: TypeHandleInput = (e, setValue) => setValue(e.target.value);
 
 export const childNodesToArray = (element: HTMLElement) => {
@@ -23,13 +28,6 @@ export interface IUser {
   average: string;
   group: string;
 }
-
-export const initialValuesFormAddUser = {
-  [UserProps.NAME]: "",
-  [UserProps.AVERAGE]: 0,
-  [UserProps.ATTENDANCE]: 0,
-  [UserProps.CONSENTS]: false,
-};
 
 export const formFields: {
   name: string;
@@ -105,3 +103,30 @@ export const getAverage = (grades: any[]) =>
           .reduce((pv, v) => pv + v) / grades.length
       ).toFixed(2)
     : 0;
+
+export const notes = [
+  {
+    id: "1",
+    title: "Quis sit consequat elit ex minim.",
+    content:
+      "Eu dolore nulla et esse eiusmod officia voluptate sunt. Incididunt duis mollit labore non deserunt esse incididunt elit pariatur. Nostrud proident esse reprehenderit dolor officia cillum incididunt. Proident non commodo ut dolor voluptate voluptate proident consectetur excepteur dolore irure qui culpa.",
+  },
+  {
+    id: "123",
+    title: "Qui do dolore ad aute ad ea laborum cupidatat Lorem do.",
+    content:
+      "Sunt irure est laboris commodo ullamco velit in quis anim eu eiusmod aliquip consequat. Pariatur dolore excepteur mollit nostrud incididunt pariatur ex laborum. Pariatur fugiat sit veniam occaecat. Consequat ea sunt ipsum mollit.",
+  },
+  {
+    id: "12",
+    title: "Ullamco laboris esse quis amet veniam consequat ut ut.",
+    content:
+      "Nisi mollit consequat ea ipsum voluptate qui aliqua nulla labore consectetur irure. Aute id aliquip qui nostrud consequat. Nostrud elit ex aute et.",
+  },
+  {
+    id: "1234",
+    title: "Pariatur eiusmod laborum voluptate enim anim amet est Lorem do fugiat eu voluptate ea nostrud.",
+    content:
+      "Exercitation tempor proident non est id quis minim sunt commodo Lorem labore magna. Exercitation ut dolore incididunt id laboris ad pariatur. Ex pariatur velit commodo pariatur eiusmod aliqua cillum ipsum.",
+  },
+];

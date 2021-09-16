@@ -14,31 +14,40 @@ export interface PropsFiledInput {
   step?: number;
   type?: string;
 }
+export interface PropsFiledTextarea {
+  name: string;
+  children: string;
+  value: string | number;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+  placeholder?: string;
+  type?: string;
+}
 
 export type TypeFiledInput<Props = {}> = (props: Props & PropsFiledInput) => JSX.Element;
 
 export interface IUser {
-  id: string,
-  index: string,
-  name: string,
-  attendance: string,
-  average: number,
-  group: string,
-  course: string,
-  subjects: { name: string }[],
-  grades: { id: string, subject: string, average: number }[]
+  id: string;
+  index: string;
+  name: string;
+  attendance: string;
+  average: number;
+  group: string;
+  course: string;
+  subjects: { name: string }[];
+  grades: { id: string; subject: string; average: number }[];
 }
 
 export interface ITeacher {
-  id: string,
-  name: string,
-  subjects: { name: string }[],
-  login: string,
-  password: string
+  id: string;
+  name: string;
+  subjects: { name: string }[];
+  login: string;
+  password: string;
 }
 
 export interface PropsUserListItem extends IUser {
-  consents?: boolean; showAll?: boolean
+  consents?: boolean;
+  showAll?: boolean;
 }
 
 export interface Color {
@@ -57,7 +66,7 @@ export interface Inputs {
   password: string;
 }
 
-export interface PropsTitle extends Color, FontSize, FontWeight { }
+export interface PropsTitle extends Color, FontSize, FontWeight {}
 
 export interface NewsProps {
   id?: string;
@@ -105,4 +114,18 @@ export interface IListGrades {
 export interface IAlert {
   title?: string;
   message: string;
+}
+
+export interface INote {
+  id: string;
+  title: string;
+  content: string;
+}
+export interface IGlobalState {
+  notes: INote[];
+}
+
+export interface INoteAction {
+  type: string;
+  payload: INote;
 }
