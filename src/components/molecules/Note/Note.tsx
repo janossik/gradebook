@@ -10,7 +10,7 @@ const Note = (props: INote) => {
     removeNote({ id: props.id });
   };
   return (
-    <article style={{ marginBottom: "20px" }}>
+    <article style={{ marginBottom: "20px", width: "270px" }}>
       <header
         style={{
           position: "relative",
@@ -20,7 +20,7 @@ const Note = (props: INote) => {
           alignItems: "center",
         }}
       >
-        <CloseButton onClick={handleRemoveNote} />
+        <CloseButton aria-label="delete" onClick={handleRemoveNote} />
         <Title as="h3" fontSize="s" capitalize>
           {title}
         </Title>

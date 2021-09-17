@@ -21,22 +21,11 @@ const Unauthorized = () => {
     <Wrapper onSubmit={handleSubmit(signIn)}>
       <div>
         <div>Your login/email</div>
-        <Input
-          {...register("login", { required: true })}
-          placeholder="email"
-          name="login"
-          defaultValue="teacher@react.com"
-        />
+        <Input {...register("login", { required: true })} placeholder="email" name="login" />
       </div>
       <div>
         <div>Your password</div>
-        <Input
-          {...register("password", { required: true })}
-          placeholder="password"
-          name="password"
-          type="password"
-          defaultValue="Hard123Hard"
-        />
+        <Input {...register("password", { required: true })} placeholder="password" name="password" type="password" />
       </div>
 
       <Button type="submit" backgroundColor={theme.color.primary} color={theme.color.background}>

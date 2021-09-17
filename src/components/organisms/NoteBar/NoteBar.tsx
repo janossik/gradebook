@@ -12,14 +12,20 @@ const NoteBar = () => {
   return (
     <>
       {isLoading ? null : (
-        <Wrapper ref={ref as RefObject<HTMLDivElement>} visible={visible}>
-          <Tag onClick={inverse}>notes</Tag>
-          <div>
-            {data.notes.map((note) => (
-              <Note key={note.id} {...note} />
-            ))}
-          </div>
-        </Wrapper>
+        <>
+          {data.notes.length ? (
+            <Wrapper ref={ref as RefObject<HTMLDivElement>} visible={visible}>
+              <Tag aria-label="show-notes" onClick={inverse}>
+                notes
+              </Tag>
+              <div>
+                {data.notes.map((note) => (
+                  <Note key={note.id} {...note} />
+                ))}
+              </div>
+            </Wrapper>
+          ) : null}
+        </>
       )}
     </>
   );
