@@ -1,4 +1,3 @@
-import Button from "components/atoms/Button/Button";
 import { NewsProps } from "types/types";
 import Header from "../Header/Header";
 import { Wrapper, ContentWrapper } from "./News.styles";
@@ -9,9 +8,6 @@ const News = ({ title, category, content, image, alt }: NewsProps) => (
     <ContentWrapper>
       <div>
         <p>{content}</p>
-        <footer>
-          <Button>read more</Button>
-        </footer>
       </div>
       {image && (
         <div>
@@ -21,6 +17,5 @@ const News = ({ title, category, content, image, alt }: NewsProps) => (
     </ContentWrapper>
   </Wrapper>
 );
-
 
 export default News;

@@ -125,11 +125,3 @@ export interface INote {
   title: string;
   content: string;
 }
-export interface IGlobalState {
-  notes: INote[];
-}
-
-export interface INoteAction {
-  type: string;
-  payload: INote;
-}

@@ -1,4 +1,4 @@
-import { useRemoveNoteMutation } from "store/store";
+import { useRemoveNoteMutation } from "store/api/notes";
 import CloseButton from "components/atoms/CloseButton/CloseButton";
 import Title from "components/atoms/Title/Title";
 import { INote } from "types/types";

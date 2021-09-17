@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useAddNoteMutation } from "store/store";
+import { useAddNoteMutation } from "store/api/notes";
 import Input from "components/atoms/Input/Input";
 import Textarea from "components/atoms/Textarea/Textarea";
 import Button from "components/atoms/Button/Button";

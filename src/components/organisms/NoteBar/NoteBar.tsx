@@ -1,7 +1,7 @@
 import Note from "components/molecules/Note/Note";
 import useHandleModal from "hooks/useHandleModal";
 import { RefObject } from "react";
-import { useGetNotesQuery } from "store/store";
+import { useGetNotesQuery } from "store/api/notes";
 import { INote } from "types/types";
 import { Tag, Wrapper } from "./NoteBar.styles";
 

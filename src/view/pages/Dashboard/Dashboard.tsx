@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import Button from "components/atoms/Button/Button";
 import Title from "components/atoms/Title/Title";
 import UsersList from "components/organisms/UsersList/UsersList";
-import useStudents from "hooks/useStudents";
 import { MenuGroup } from "components/organisms/MenuGroup/MenuGroup";
+import { useGetGroupsQuery } from "store/api/groups";
 
 const Dashboard: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [groups, setGroups] = useState<string[]>([]);
-  const { getGroups } = useStudents();
+  const { data, isLoading } = useGetGroupsQuery<{ data?: { groups: string[] }; isLoading: boolean }>({});
   const [activeMenuGroup, setActiveMenuGroup] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const groups = await getGroups();
-      if (groups) {
-        setGroups(groups);
-      }
-    })();
-  }, [getGroups]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  if (!id && groups.length > 0) {
-    return <Redirect to={`/dashboard/${groups[0]}`} />;
+  if (!data) return <></>;
+
+  if (!id && data.groups.length > 0) {
+    return <Redirect to={`/dashboard/${data.groups[0]}`} />;
   }
 
   const handleMenuGroup = () => {
@@ -42,7 +38,7 @@ const Dashboard: React.FC = () => {
         </div>
         <UsersList id={id} />
       </div>
-      <MenuGroup active={activeMenuGroup} setActive={setActiveMenuGroup} id={id} groups={groups} />
+      <MenuGroup active={activeMenuGroup} setActive={setActiveMenuGroup} id={id} groups={data?.groups || []} />
     </>
   );
 };

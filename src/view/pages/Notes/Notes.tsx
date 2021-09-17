@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Note from "components/molecules/Note/Note";
 import { INote } from "types/types";
 import NoteForm from "components/organisms/NoteForm/NoteForm";
-import { useGetNotesQuery } from "store/store";
+import { useGetNotesQuery } from "store/api/notes";
 
 const Wrapper = styled.article`
   display: grid;

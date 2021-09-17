@@ -1,38 +1,32 @@
 import UsersListItem from "components/organisms/UsersListItem/UsersListItem";
 import { useError } from "hooks/useError";
-import useStudents from "hooks/useStudents";
-import { useState, useEffect } from "react";
+import { useGetStudentsQuery } from "store/api/students";
 import { IUser } from "types/types";
 import { Wrapper } from "./UsersList.styles";
 
 const UserList = ({ id, users }: { id: string; users?: IUser[] }) => {
-  const { getStudentsByGroup } = useStudents();
-  const [students, setStudents] = useState<IUser[]>([]);
   const [, dispatchError] = useError();
-  useEffect(() => {
-    if (!users) {
-      try {
-        (async () => {
-          const students = await getStudentsByGroup(id);
-          if (students) {
-            setStudents(students);
-          } else {
-          }
-          return () => {};
-        })();
-      } catch (e) {
-        dispatchError({ message: "You can't get users from the group" });
-      }
-    } else {
-      setStudents(users.filter((item) => item.group === id));
-    }
-  }, [id, getStudentsByGroup, users, dispatchError]);
+
+  const { data, isLoading, isError } = useGetStudentsQuery<{
+    data: { students: IUser[] };
+    isLoading: boolean;
+    isError: boolean;
+  }>({ id });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data || isError) {
+    dispatchError({ message: "You can't get users from the group" });
+    return <div>You can't get students</div>;
+  }
 
   return (
     <>
-      {students.length ? (
+      {data.students.length ? (
         <Wrapper>
-          {students.map((item) => (
+          {data.students.map((item) => (
             <UsersListItem key={item.id} {...item} />
           ))}
         </Wrapper>

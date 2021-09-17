@@ -8,7 +8,7 @@ const Authorized = () => (
       {pages.map(({ path, View }) => (
         <Route key={path} path={path} component={View} />
       ))}
-      <Redirect to="/dashboard/" path="/" />
+      <Redirect path="/" to="/dashboard/" />
     </Switch>
   </MainTemplate>
 );

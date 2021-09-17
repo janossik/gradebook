@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { AuthProvider } from "hooks/useAuth";
 import StyledProvider from "providers/StyledProvider";
 import { ErrorProvider } from "hooks/useError";
-import { store } from "store/store";
+import { store } from "store";
 
 const AppProvider = ({ children }: { children: JSX.Element }) => {
   return (
